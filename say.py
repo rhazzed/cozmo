@@ -14,9 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-'''Hello World
+''' say.py
 
-Make Cozmo say 'Hello World' in this simple Cozmo SDK example program.
+Make Cozmo say whatever you type on the command line or input after
+starting the program.
+
 '''
 
 import sys
