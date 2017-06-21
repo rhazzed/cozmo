@@ -1,6 +1,7 @@
 #!/bin/sh
 ##########################
-# speakEmailSubjs - Have Cozmo speak the subjects to all emails at BSE
+# speakEmailSubjs - Have Cozmo speak the subjects of all emails at the
+#                   given account
 #
 #   NOTE: REQUIRES Python3 and a CONNECTED COZMO (e.g. adb, Android
 #         device currently attached to Cozmo over his WiFi link, etc...)
