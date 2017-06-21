@@ -132,6 +132,7 @@ if __name__ == '__main__':
     cozmo.setup_basic_logging()
     cozmo.robot.Robot.drive_off_charger_on_connect = False  # Cozmo can stay on charger for now
     try:
-        cozmo.connect_with_tkviewer(run, force_on_top=True)
+        cozmo.connect(run)
+        #cozmo.connect_with_tkviewer(run, force_on_top=True)
     except cozmo.ConnectionError as e:
         sys.exit("A connection error occurred: %s" % e)

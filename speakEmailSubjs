@@ -1,0 +1,80 @@
+#!/bin/sh
+##########################
+# speakEmailSubjs - Have Cozmo speak the subjects to all emails at BSE
+#
+#   NOTE: REQUIRES Python3 and a CONNECTED COZMO (e.g. adb, Android
+#         device currently attached to Cozmo over his WiFi link, etc...)
+#
+# HISTORICAL INFORMATION -
+#
+#  2017-06-17  msipin  Derived from checkCozSay
+#  2017-06-19  msipin  Cleaned up logic to support more feature, both from
+#                      the IMAP Python script and as command-line options to
+#                      this shell script, itself.
+##########################
+
+baseDir="."
+excludeThis="YouShouldNeverSeeThisInRealLife"
+if [ $# -gt 0 ]
+then
+    if [ $1 = "all" ]
+    then
+        getEmailCmd="python $baseDir/imap_python3.py"		# All messages
+    elif [ $1 = "count" ]
+    then
+        getEmailCmd="python $baseDir/imap_python3.py new"	# Just a count of new messages
+        excludeThis="Subj:"
+    elif [ $1 = "Coz_Say" ]
+    then
+        getEmailCmd="python $baseDir/imap_python3.py Coz_Say"  # Direct cozmo to speak these
+        excludeThis="^You have"
+    else
+        getEmailCmd="python $baseDir/imap_python3.py $*"  # Filter by this (these) string(s)...
+    fi
+else
+    getEmailCmd="python $baseDir/imap_python3.py new"	# Unread messages
+fi
+
+
+tmp_file1=/var/tmp/ses.$$.1
+
+trap "rm -f $tmp_file1; exit 0" 0 1 2 3 6 12 15
+
+
+rm -f $tmp_file1
+
+##echo "DEBUG: Exclude = [${excludeThis}]"
+
+$getEmailCmd | egrep "^You have | Subj: " | grep -v "${excludeThis}" | sed "s/'//g" | sed "s/\"//g" | sed "s/!//g" | sed "s/#//g" | awk '{
+matched=1
+start_at=1
+##printf("DEBUG: Processing [%s]...\n",$0)
+if (($1 == "You") && ($2 == "have")) { matched=1 };
+if (($4 == "Subj:") && ($5 == "Coz_Say")) { matched=1; start_at=6; };
+if ($4 == "Subj:") { matched=1; $4 = "Subject"; };
+
+if (matched == 1) {
+    printf "python say.py ";
+    for (i=start_at;i<= NF;i++) {
+	if ($i != "Subj:") printf " %s", $i;
+    }
+    printf ";sleep 0;\n";
+};
+
+
+}' >> $tmp_file1
+chmod 755 $tmp_file1
+# DISPLAY results -
+cat $tmp_file1
+# EXECUTE results -
+$tmp_file1
+
+exit 0
+
+
+Message # 1 - Subj: Test 01
+Message # 3 - Subj: Test 02
+Message # 5 - Subj: Test3
+Message # 7 - Subj: Instructions for installing Python 3.5 using pyenv on Debian Jessie · GitHub
+Message # 8 - Subj: muahahaha
+
