@@ -1,7 +1,11 @@
 #!/usr/bin/env python
-#
+########################################################################
 # Use Python 3 and IMAP to iterate over emails in the Inbox
 #
+# HISTORICAL INFORMATION -
+#
+#  2017-06-21  msipin  Attempted to handle "bad SUBJECT lines".
+########################################################################
 import sys
 import imaplib
 import getpass
@@ -45,8 +49,11 @@ def process_mailbox(M,filter):
             return
 
         msg = email.message_from_bytes(data[0][1])
-        hdr = email.header.make_header(email.header.decode_header(msg['Subject']))
-        subject = str(hdr)
+        try:
+            hdr = email.header.make_header(email.header.decode_header(msg['Subject']))
+            subject = str(hdr)
+        except TypeError:
+            subject = "(unknown)"
         print('\nMessage # %d - Subj: %s' % (int(num), subject))
         #print('Raw Date:', msg['Date'])
         # Now convert to local date-time
