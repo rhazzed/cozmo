@@ -12,6 +12,7 @@
 #  2017-06-19  msipin  Cleaned up logic to support more feature, both from
 #                      the IMAP Python script and as command-line options to
 #                      this shell script, itself.
+#  2017-06-21  msipin  Filtered out parenthesis and exclamation points
 ##########################
 
 baseDir="."
@@ -46,7 +47,7 @@ rm -f $tmp_file1
 
 ##echo "DEBUG: Exclude = [${excludeThis}]"
 
-$getEmailCmd | egrep "^You have | Subj: " | grep -v "${excludeThis}" | sed "s/'//g" | sed "s/\"//g" | sed "s/!//g" | sed "s/#//g" | awk '{
+$getEmailCmd | egrep "^You have | Subj: " | grep -v "${excludeThis}" | sed "s/'//g" | sed "s/\"//g" | sed "s/!//g" | sed "s/#//g" | sed "s/(/ /g" | sed "s/)/ /g" | sed "s/\!/ /g" | awk '{
 matched=1
 start_at=1
 ##printf("DEBUG: Processing [%s]...\n",$0)
