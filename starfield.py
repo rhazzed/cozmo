@@ -1,7 +1,16 @@
 #!/usr/bin/env python3
+############################################################################
+# starfield.py - Draw a "moving starfield" on Cozmo's display
+#
+# HISTORICAL INFORMATION -
+#
+#  2017-06-30  msipin  Added this header. Manually handled driving off/
+#                      returning to the charger.
+############################################################################
 
 import sys
 import time
+from cozmo.util import distance_mm, speed_mmps
 
 try:
     from PIL import Image
@@ -10,6 +19,8 @@ except ImportError:
 
 import cozmo
 from random import randrange
+
+shouldContinue=1
 
 class starfield:
 
@@ -85,28 +96,58 @@ class starfield:
 
     def run(self):
         """ Main Loop """
-        while 1:
+        global shouldContinue
+        while shouldContinue:
         	t0 = time.clock()
         	#throttle the speed of the animation by counting ticks
         	if t0 - self.clock > .01: 
         		self.move_and_draw_stars()
         		self.clock = time.clock()
+        # Don't exit this method right away - give
+        # Coz enough time to backup into the charger
+        # if that's where he was before we started
+        time.sleep(10)
            		
 def run(sdk_conn):
     '''The run method runs once Cozmo is connected.'''
+    global shouldContinue
     robot = sdk_conn.wait_for_robot()
-   	
+
+    wasOnCharger = 0
+
+    # If the robot is on the charger, drive forward and clear of the charger
+    if robot.is_on_charger:
+        wasOnCharger = 1
+        # drive off the charger
+        robot.drive_off_charger_contacts().wait_for_completed()
+        robot.drive_straight(distance_mm(20), speed_mmps(50)).wait_for_completed()
+
     # move head and lift to make it easy to see Cozmo's face
     robot.set_lift_height(0.0).wait_for_completed()
     robot.set_head_angle(cozmo.robot.MAX_HEAD_ANGLE).wait_for_completed()
 
+    try:
+        starfield(300, 32, robot).run()
+    except KeyboardInterrupt:
+        print("User abort...")
+        shouldContinue = 0
+        # Give animation a chance to finish at least one redraw
+        time.sleep(2)
+        pass
+
+    # If we drove him off the charger, drive him back on it
+    if wasOnCharger:
+        # Backup
+        robot.drive_straight(distance_mm(-30), speed_mmps(100)).wait_for_completed()
+        if robot.is_on_charger:
+            print("Yay! Back on the charger.")
+        else:
+            print("Nope.. I missed the charger =(")
 
 
-    starfield(300, 32, robot).run()
-        
 if __name__ == '__main__':
     cozmo.setup_basic_logging()
-    cozmo.robot.Robot.drive_off_charger_on_connect = True
+    cozmo.robot.Robot.drive_off_charger_on_connect = False
     try:
         cozmo.connect(run)
     except cozmo.ConnectionError as e:
