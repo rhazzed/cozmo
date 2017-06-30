@@ -1,0 +1,18 @@
+#!/usr/bin/python
+#######################
+# THIS FILE IS AN EXAMPLE FILE - Change its name from
+#   "email_creds.py.EXAMPLE" to just "email_creds.py" and
+#   then change the values below to reflect your actual
+#   email server, username and password.
+#######################
+# email_creds.py - This file stores a user's email credentials.
+#    CAUTION: This file must be made read-only by the user that
+#             is allowed to read this account's email!
+#######################
+
+# DEAR GOD IN HEAVEN, DON'T GIVE ANYONE THIS FILE WITHOUT
+# CHANGING THE FOLLOWING THREE LINES TO SOMETHING BENIGN -
+EMAIL_SERVER="imap_server.example.com"
+EMAIL_ACCOUNT = "your_username@example.com"
+EMAIL_PASS="your_password_goes_here"
+
