@@ -96,14 +96,17 @@ def run(sdk_conn):
     '''The run method runs once Cozmo is connected.'''
     robot = sdk_conn.wait_for_robot()
    	
-	# move head and lift to make it easy to see Cozmo's face
+    # move head and lift to make it easy to see Cozmo's face
     robot.set_lift_height(0.0).wait_for_completed()
     robot.set_head_angle(cozmo.robot.MAX_HEAD_ANGLE).wait_for_completed()
+
+
+
     starfield(300, 32, robot).run()
         
 if __name__ == '__main__':
     cozmo.setup_basic_logging()
-    cozmo.robot.Robot.drive_off_charger_on_connect = False
+    cozmo.robot.Robot.drive_off_charger_on_connect = True
     try:
         cozmo.connect(run)
     except cozmo.ConnectionError as e:
