@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
-
-'''Make Cozmo drive backwards and see if that makes him dock with his charger.
-'''
+############################################################################
+# backupTillCharging.py - Make Cozmo drive straight backwards a little
+#                         bit, to try to dock with his charger.
+#
+# HISTORICAL INFORMATION -
+#
+#  2017-06-30  msipin  Added this header. Drove a little further each try.
+#                      Made Cozmo say whether he found the charger or not.
+############################################################################
 
 import sys
 import asyncio
@@ -16,7 +22,7 @@ def backup(robot, trial):
 	# If the robot is on the charger, do nothing
 	if not robot.is_on_charger:
 		# drive backwards a small bit
-		robot.drive_straight(distance_mm(-10), speed_mmps(50)).wait_for_completed()
+		robot.drive_straight(distance_mm(-20), speed_mmps(50)).wait_for_completed()
 
 	# show the battery voltage
 	print("Current battery voltage: %s" % robot.battery_voltage)
@@ -25,6 +31,8 @@ def backup(robot, trial):
 	print("Checking if I am on the charger...")
 	if robot.is_on_charger:
 		print("I am! Yay!")
+		robot.say_text("yay!").wait_for_completed()
+		robot.say_text("I found it!").wait_for_completed()
 	else:
 		print("Nope.. not on the charger =(")
 		print("Trying again...")
@@ -33,6 +41,8 @@ def backup(robot, trial):
 			backup(robot, trial)
 		else:
 			print("I'm getting tired. Giving up =(")
+			robot.say_text("I'm getting tired.").wait_for_completed()
+			robot.say_text("I give up.").wait_for_completed()
 
 
 def run(sdk_conn):
