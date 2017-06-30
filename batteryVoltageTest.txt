@@ -1,0 +1,536 @@
+I tested how long Cozmo could last off of his charger if I never made
+him move around, and only connected to him to read his current battery
+voltage. This test suggests the absolute maximum time Cozmo can remain
+off his charger - no matter what else he's doing, even "nothing".
+You should not expect him to last longer than this test suggests, even
+if he's just sitting there, with no commanding.
+
+
+STARTED TEST ON A FULL CHARGE:  Thu Jun 22 16:18:12 PDT 2017
+TERMINATED TEST (Cozmo died):   Thu Jun 22 17:49:55 PDT 2017
+E.T.: approx. 1 hour 31 minutes
+
+
+
+root# while [ 1 ]; do date; readbatteryvoltage.py ; sleep 30; echo; date; done
+
+Thu Jun 22 16:18:12 PDT 2017
+Current battery voltage: 4.0799560546875
+
+Thu Jun 22 16:18:45 PDT 2017
+Thu Jun 22 16:18:45 PDT 2017
+Current battery voltage: 4.0679931640625
+
+Thu Jun 22 16:19:18 PDT 2017
+Thu Jun 22 16:19:18 PDT 2017
+Current battery voltage: 4.0679931640625
+
+Thu Jun 22 16:19:51 PDT 2017
+Thu Jun 22 16:19:51 PDT 2017
+Current battery voltage: 4.05194091796875
+
+Thu Jun 22 16:20:24 PDT 2017
+Thu Jun 22 16:20:24 PDT 2017
+Current battery voltage: 4.05194091796875
+
+Thu Jun 22 16:20:57 PDT 2017
+Thu Jun 22 16:20:57 PDT 2017
+Current battery voltage: 4.03594970703125
+
+Thu Jun 22 16:21:30 PDT 2017
+Thu Jun 22 16:21:30 PDT 2017
+Current battery voltage: 4.03594970703125
+
+Thu Jun 22 16:22:03 PDT 2017
+Thu Jun 22 16:22:03 PDT 2017
+Current battery voltage: 4.03594970703125
+
+
+Thu Jun 22 16:23:05 PDT 2017
+Current battery voltage: 4.02398681640625
+
+Thu Jun 22 16:23:38 PDT 2017
+Current battery voltage: 4.02398681640625
+
+Thu Jun 22 16:24:11 PDT 2017
+Current battery voltage: 4.00799560546875
+
+Thu Jun 22 16:24:44 PDT 2017
+Current battery voltage: 3.9959716796875
+
+Thu Jun 22 16:25:17 PDT 2017
+Current battery voltage: 3.9959716796875
+
+Thu Jun 22 16:25:50 PDT 2017
+Current battery voltage: 3.96795654296875
+
+Thu Jun 22 16:26:23 PDT 2017
+Current battery voltage: 3.97998046875
+
+Thu Jun 22 16:26:56 PDT 2017
+Current battery voltage: 3.97998046875
+
+Thu Jun 22 16:27:29 PDT 2017
+Current battery voltage: 3.97998046875
+
+Thu Jun 22 16:28:02 PDT 2017
+Current battery voltage: 3.96795654296875
+
+Thu Jun 22 16:28:35 PDT 2017
+Current battery voltage: 3.96795654296875
+
+Thu Jun 22 16:29:08 PDT 2017
+Current battery voltage: 3.95196533203125
+
+Thu Jun 22 16:29:41 PDT 2017
+Current battery voltage: 3.95196533203125
+
+Thu Jun 22 16:30:14 PDT 2017
+Current battery voltage: 3.93994140625
+
+Thu Jun 22 16:30:47 PDT 2017
+Current battery voltage: 3.93994140625
+
+Thu Jun 22 16:31:20 PDT 2017
+Current battery voltage: 3.93994140625
+
+Thu Jun 22 16:31:53 PDT 2017
+Current battery voltage: 3.9239501953125
+
+Thu Jun 22 16:32:26 PDT 2017
+Current battery voltage: 3.9239501953125
+
+Thu Jun 22 16:32:59 PDT 2017
+Current battery voltage: 3.9119873046875
+
+Thu Jun 22 16:33:32 PDT 2017
+Current battery voltage: 3.9119873046875
+
+Thu Jun 22 16:34:05 PDT 2017
+Current battery voltage: 3.9119873046875
+
+Thu Jun 22 16:34:38 PDT 2017
+Current battery voltage: 3.88397216796875
+
+Thu Jun 22 16:35:10 PDT 2017
+Current battery voltage: 3.9119873046875
+
+Thu Jun 22 16:35:43 PDT 2017
+Current battery voltage: 3.89599609375
+
+Thu Jun 22 16:36:16 PDT 2017
+Current battery voltage: 3.89599609375
+
+Thu Jun 22 16:36:50 PDT 2017
+Current battery voltage: 3.89599609375
+
+Thu Jun 22 16:37:23 PDT 2017
+Current battery voltage: 3.89599609375
+
+Thu Jun 22 16:37:56 PDT 2017
+Current battery voltage: 3.88397216796875
+
+Thu Jun 22 16:38:29 PDT 2017
+Current battery voltage: 3.88397216796875
+
+Thu Jun 22 16:39:02 PDT 2017
+Current battery voltage: 3.88397216796875
+
+Thu Jun 22 16:39:35 PDT 2017
+Current battery voltage: 3.88397216796875
+
+Thu Jun 22 16:40:08 PDT 2017
+Current battery voltage: 3.86798095703125
+
+Thu Jun 22 16:40:41 PDT 2017
+Current battery voltage: 3.86798095703125
+
+Thu Jun 22 16:41:14 PDT 2017
+Current battery voltage: 3.86798095703125
+
+Thu Jun 22 16:41:47 PDT 2017
+Current battery voltage: 3.85595703125
+
+Thu Jun 22 16:42:20 PDT 2017
+Current battery voltage: 3.85595703125
+
+Thu Jun 22 16:42:53 PDT 2017
+Current battery voltage: 3.85595703125
+
+Thu Jun 22 16:43:26 PDT 2017
+Current battery voltage: 3.8399658203125
+
+Thu Jun 22 16:43:59 PDT 2017
+Current battery voltage: 3.81195068359375
+
+Thu Jun 22 16:44:32 PDT 2017
+Current battery voltage: 3.8399658203125
+
+Thu Jun 22 16:45:05 PDT 2017
+Current battery voltage: 3.8399658203125
+
+Thu Jun 22 16:45:38 PDT 2017
+Current battery voltage: 3.8399658203125
+
+Thu Jun 22 16:46:11 PDT 2017
+Current battery voltage: 3.8399658203125
+
+Thu Jun 22 16:46:44 PDT 2017
+Current battery voltage: 3.79998779296875
+
+Thu Jun 22 16:47:17 PDT 2017
+Current battery voltage: 3.82794189453125
+
+Thu Jun 22 16:47:49 PDT 2017
+Current battery voltage: 3.82794189453125
+
+Thu Jun 22 16:48:22 PDT 2017
+Current battery voltage: 3.81195068359375
+
+Thu Jun 22 16:48:55 PDT 2017
+Current battery voltage: 3.81195068359375
+
+Thu Jun 22 16:49:28 PDT 2017
+Current battery voltage: 3.81195068359375
+
+Thu Jun 22 16:50:01 PDT 2017
+Current battery voltage: 3.81195068359375
+
+Thu Jun 22 16:50:34 PDT 2017
+Current battery voltage: 3.79998779296875
+
+Thu Jun 22 16:51:07 PDT 2017
+Current battery voltage: 3.79998779296875
+
+Thu Jun 22 16:51:40 PDT 2017
+Current battery voltage: 3.77197265625
+
+Thu Jun 22 16:52:13 PDT 2017
+Current battery voltage: 3.79998779296875
+
+Thu Jun 22 16:52:46 PDT 2017
+Current battery voltage: 3.78399658203125
+
+Thu Jun 22 16:53:19 PDT 2017
+Current battery voltage: 3.79998779296875
+
+Thu Jun 22 16:53:52 PDT 2017
+Current battery voltage: 3.78399658203125
+
+Thu Jun 22 16:54:25 PDT 2017
+Current battery voltage: 3.78399658203125
+
+Thu Jun 22 16:54:58 PDT 2017
+Current battery voltage: 3.78399658203125
+
+Thu Jun 22 16:55:31 PDT 2017
+Current battery voltage: 3.78399658203125
+
+Thu Jun 22 16:56:04 PDT 2017
+Current battery voltage: 3.77197265625
+
+Thu Jun 22 16:56:37 PDT 2017
+Current battery voltage: 3.77197265625
+
+Thu Jun 22 16:57:10 PDT 2017
+Current battery voltage: 3.77197265625
+
+Thu Jun 22 16:57:43 PDT 2017
+Current battery voltage: 3.77197265625
+
+Thu Jun 22 16:58:16 PDT 2017
+Current battery voltage: 3.77197265625
+
+Thu Jun 22 16:58:48 PDT 2017
+Current battery voltage: 3.7559814453125
+
+Thu Jun 22 16:59:22 PDT 2017
+Current battery voltage: 3.7559814453125
+
+Thu Jun 22 16:59:55 PDT 2017
+Current battery voltage: 3.7559814453125
+
+Thu Jun 22 17:00:28 PDT 2017
+Current battery voltage: 3.7559814453125
+
+Thu Jun 22 17:01:00 PDT 2017
+Current battery voltage: 3.7559814453125
+
+Thu Jun 22 17:01:33 PDT 2017
+Current battery voltage: 3.7559814453125
+
+Thu Jun 22 17:02:06 PDT 2017
+Current battery voltage: 3.74395751953125
+
+Thu Jun 22 17:02:39 PDT 2017
+Current battery voltage: 3.74395751953125
+
+Thu Jun 22 17:03:12 PDT 2017
+Current battery voltage: 3.74395751953125
+
+Thu Jun 22 17:03:45 PDT 2017
+Current battery voltage: 3.74395751953125
+
+Thu Jun 22 17:04:18 PDT 2017
+Current battery voltage: 3.72796630859375
+
+Thu Jun 22 17:04:51 PDT 2017
+Current battery voltage: 3.72796630859375
+
+Thu Jun 22 17:05:24 PDT 2017
+Current battery voltage: 3.72796630859375
+
+Thu Jun 22 17:05:57 PDT 2017
+Current battery voltage: 3.72796630859375
+
+Thu Jun 22 17:06:30 PDT 2017
+Current battery voltage: 3.72796630859375
+
+Thu Jun 22 17:07:03 PDT 2017
+Current battery voltage: 3.72796630859375
+
+Thu Jun 22 17:07:36 PDT 2017
+Current battery voltage: 3.7159423828125
+
+Thu Jun 22 17:08:09 PDT 2017
+Current battery voltage: 3.7159423828125
+
+Thu Jun 22 17:08:42 PDT 2017
+Current battery voltage: 3.7159423828125
+
+Thu Jun 22 17:09:15 PDT 2017
+Current battery voltage: 3.6839599609375
+
+Thu Jun 22 17:09:48 PDT 2017
+Current battery voltage: 3.7159423828125
+
+Thu Jun 22 17:10:21 PDT 2017
+Current battery voltage: 3.699951171875
+
+Thu Jun 22 17:10:54 PDT 2017
+Current battery voltage: 3.699951171875
+
+Thu Jun 22 17:11:27 PDT 2017
+Current battery voltage: 3.6719970703125
+
+Thu Jun 22 17:12:00 PDT 2017
+Current battery voltage: 3.6839599609375
+
+Thu Jun 22 17:12:32 PDT 2017
+Current battery voltage: 3.65594482421875
+
+Thu Jun 22 17:13:05 PDT 2017
+Current battery voltage: 3.6839599609375
+
+Thu Jun 22 17:13:38 PDT 2017
+Current battery voltage: 3.6839599609375
+
+Thu Jun 22 17:14:11 PDT 2017
+Current battery voltage: 3.6839599609375
+
+Thu Jun 22 17:14:44 PDT 2017
+Current battery voltage: 3.65594482421875
+
+Thu Jun 22 17:15:17 PDT 2017
+Current battery voltage: 3.6839599609375
+
+Thu Jun 22 17:15:50 PDT 2017
+Current battery voltage: 3.64398193359375
+
+Thu Jun 22 17:16:23 PDT 2017
+Current battery voltage: 3.6719970703125
+
+Thu Jun 22 17:16:56 PDT 2017
+Current battery voltage: 3.6719970703125
+
+Thu Jun 22 17:17:29 PDT 2017
+Current battery voltage: 3.6719970703125
+
+Thu Jun 22 17:18:02 PDT 2017
+Current battery voltage: 3.6719970703125
+
+Thu Jun 22 17:18:35 PDT 2017
+Current battery voltage: 3.64398193359375
+
+Thu Jun 22 17:19:08 PDT 2017
+Current battery voltage: 3.6719970703125
+
+Thu Jun 22 17:19:41 PDT 2017
+Current battery voltage: 3.6719970703125
+
+Thu Jun 22 17:20:14 PDT 2017
+Current battery voltage: 3.65594482421875
+
+Thu Jun 22 17:20:47 PDT 2017
+Current battery voltage: 3.65594482421875
+
+Thu Jun 22 17:21:20 PDT 2017
+Current battery voltage: 3.65594482421875
+
+Thu Jun 22 17:21:53 PDT 2017
+Current battery voltage: 3.62799072265625
+
+Thu Jun 22 17:22:26 PDT 2017
+Current battery voltage: 3.615966796875
+
+Thu Jun 22 17:22:59 PDT 2017
+Current battery voltage: 3.615966796875
+
+Thu Jun 22 17:23:32 PDT 2017
+Current battery voltage: 3.615966796875
+
+Thu Jun 22 17:24:05 PDT 2017
+Current battery voltage: 3.5999755859375
+
+Thu Jun 22 17:24:38 PDT 2017
+Current battery voltage: 3.64398193359375
+
+Thu Jun 22 17:25:11 PDT 2017
+Current battery voltage: 3.64398193359375
+
+Thu Jun 22 17:25:44 PDT 2017
+Current battery voltage: 3.62799072265625
+
+Thu Jun 22 17:26:17 PDT 2017
+Current battery voltage: 3.62799072265625
+
+Thu Jun 22 17:26:50 PDT 2017
+Current battery voltage: 3.62799072265625
+
+Thu Jun 22 17:27:23 PDT 2017
+Current battery voltage: 3.62799072265625
+
+Thu Jun 22 17:27:56 PDT 2017
+Current battery voltage: 3.62799072265625
+
+Thu Jun 22 17:28:29 PDT 2017
+Current battery voltage: 3.62799072265625
+
+Thu Jun 22 17:29:02 PDT 2017
+Current battery voltage: 3.62799072265625
+
+Thu Jun 22 17:29:34 PDT 2017
+Current battery voltage: 3.62799072265625
+
+Thu Jun 22 17:30:07 PDT 2017
+Current battery voltage: 3.62799072265625
+
+Thu Jun 22 17:30:40 PDT 2017
+Current battery voltage: 3.615966796875
+
+Thu Jun 22 17:31:13 PDT 2017
+Current battery voltage: 3.615966796875
+
+Thu Jun 22 17:31:46 PDT 2017
+Current battery voltage: 3.615966796875
+
+Thu Jun 22 17:32:19 PDT 2017
+Current battery voltage: 3.615966796875
+
+Thu Jun 22 17:32:52 PDT 2017
+Current battery voltage: 3.615966796875
+
+Thu Jun 22 17:33:25 PDT 2017
+Current battery voltage: 3.5999755859375
+
+Thu Jun 22 17:33:58 PDT 2017
+Current battery voltage: 3.5999755859375
+
+Thu Jun 22 17:34:31 PDT 2017
+Current battery voltage: 3.5999755859375
+
+Thu Jun 22 17:35:04 PDT 2017
+Current battery voltage: 3.5999755859375
+
+Thu Jun 22 17:35:37 PDT 2017
+Current battery voltage: 3.5999755859375
+
+Thu Jun 22 17:36:10 PDT 2017
+Current battery voltage: 3.5999755859375
+
+Thu Jun 22 17:36:43 PDT 2017
+Current battery voltage: 3.5999755859375
+
+Thu Jun 22 17:37:16 PDT 2017
+Current battery voltage: 3.58795166015625
+
+Thu Jun 22 17:37:49 PDT 2017
+Current battery voltage: 3.58795166015625
+
+Thu Jun 22 17:38:22 PDT 2017
+Current battery voltage: 3.55999755859375
+
+Thu Jun 22 17:38:55 PDT 2017
+Current battery voltage: 3.58795166015625
+
+Thu Jun 22 17:39:28 PDT 2017
+Current battery voltage: 3.58795166015625
+
+Thu Jun 22 17:40:01 PDT 2017
+Current battery voltage: 3.58795166015625
+
+Thu Jun 22 17:40:34 PDT 2017
+Current battery voltage: 3.58795166015625
+
+Thu Jun 22 17:41:07 PDT 2017
+Current battery voltage: 3.58795166015625
+
+Thu Jun 22 17:41:40 PDT 2017
+Current battery voltage: 3.57196044921875
+
+Thu Jun 22 17:42:13 PDT 2017
+Current battery voltage: 3.57196044921875
+
+Thu Jun 22 17:42:46 PDT 2017
+Current battery voltage: 3.57196044921875
+
+Thu Jun 22 17:43:19 PDT 2017
+Current battery voltage: 3.55999755859375
+
+Thu Jun 22 17:43:52 PDT 2017
+Current battery voltage: 3.55999755859375
+
+Thu Jun 22 17:44:25 PDT 2017
+Current battery voltage: 3.5439453125
+
+Thu Jun 22 17:44:58 PDT 2017
+Current battery voltage: 3.5439453125
+
+Thu Jun 22 17:45:31 PDT 2017
+Current battery voltage: 3.5439453125
+
+Thu Jun 22 17:46:04 PDT 2017
+Current battery voltage: 3.531982421875
+
+Thu Jun 22 17:46:37 PDT 2017
+Current battery voltage: 3.50396728515625
+
+Thu Jun 22 17:47:10 PDT 2017
+Current battery voltage: 3.50396728515625
+
+Thu Jun 22 17:47:43 PDT 2017
+Current battery voltage: 3.48797607421875
+
+Thu Jun 22 17:48:16 PDT 2017
+Current battery voltage: 3.4599609375
+
+Thu Jun 22 17:48:49 PDT 2017
+Current battery voltage: 3.447998046875
+
+Thu Jun 22 17:49:22 PDT 2017
+Current battery voltage: 3.43194580078125
+
+Thu Jun 22 17:49:55 PDT 2017
+Lost connection to the device: None
+No iOS device found running Cozmo: [Errno 2] No such file or directory
+No Android device found running Cozmo: No connected Android devices running Cozmo in SDK mode
+A connection error occurred: No devices connected running Cozmo in SDK mode
+
+Thu Jun 22 17:50:27 PDT 2017
+Lost connection to the device: None
+No iOS device found running Cozmo: [Errno 2] No such file or directory
+No Android device found running Cozmo: No connected Android devices running Cozmo in SDK mode
+A connection error occurred: No devices connected running Cozmo in SDK mode
+^C
+root# ^C
+

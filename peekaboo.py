@@ -4,6 +4,7 @@ import asyncio
 import time
 import cozmo
 from cozmo.util import degrees, Pose
+import random
 
 '''This is a script for game Peek a Boo. It will first store the players' names and then play peek a boo with the player. '''
 
@@ -70,9 +71,9 @@ class PeekABoo:
 
         if new_face is not None:
             if new_face.face_id == self.face.face_id:
-                seeyou_text = [", I see you", ", you are here", ", haha",", You are so funny", ", you are really good at hide and seek." ]
+                seeyou_text = [", I see you", ", I found you right here", ", hi there",", You are really good at hide and seek." ]
                 anim = await self.coz.play_anim("anim_sparking_success_02").wait_for_completed()
-                await self.coz.say_text(self.name + cozmo.util.random.choice(seeyou_text)).wait_for_completed()
+                await self.coz.say_text(self.name + random.choice(seeyou_text)).wait_for_completed()
             else:
                 await self.coz.drive_wheels(-400, -400, duration=0.25)
                 await self.coz.say_text("who are you, you look weird").wait_for_completed()
