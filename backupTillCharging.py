@@ -22,7 +22,7 @@ def backup(robot, trial):
 	# If the robot is on the charger, do nothing
 	if not robot.is_on_charger:
 		# drive backwards a small bit
-		robot.drive_straight(distance_mm(-20), speed_mmps(50)).wait_for_completed()
+		robot.drive_straight(distance_mm(-40), speed_mmps(100)).wait_for_completed()
 
 	# show the battery voltage
 	print("Current battery voltage: %s" % robot.battery_voltage)
