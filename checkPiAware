@@ -6,14 +6,17 @@
 #  HISTORICAL INFORMATION -
 #
 #  2017-06-19  msipin  Created.  NOTE: Try to replace curl with wget...
+#  2017-06-30  msipin  Replaced curl with wget.
 ################################
 
-PiAwareHost="192.168.1.123:8080"
+#PiAwareHost="192.168.1.123:8080"
+PiAwareHost="192.168.2.117:8080"
 
-sayThis=`curl --silent http://${PiAwareHost}/data/aircraft.json | grep "\"hex\":" | wc -l | awk '{ printf "You are currently tracking %s planes\n",$1 }'`
+#  sayThis=`curl --silent http://${PiAwareHost}/data/aircraft.json | grep "\"hex\":" | wc -l | awk '{ printf "You are currently tracking %s planes\n",$1 }'`
+sayThis=`wget -q -O - "http://${PiAwareHost}/data/aircraft.json" | grep "\"hex\":" | wc -l | awk '{ printf "You are currently tracking %s planes\n",$1 }'`
 
-#echo $sayThis
-python say.py $sayThis
+echo $sayThis
+#python say.py $sayThis
 
 exit 0
 

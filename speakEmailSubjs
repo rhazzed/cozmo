@@ -13,6 +13,7 @@
 #                      the IMAP Python script and as command-line options to
 #                      this shell script, itself.
 #  2017-06-21  msipin  Filtered out parenthesis and exclamation points
+#  2017-06-30  msipin  Explicitly called python scripts with Python3
 ##########################
 
 baseDir="."
@@ -21,20 +22,20 @@ if [ $# -gt 0 ]
 then
     if [ $1 = "all" ]
     then
-        getEmailCmd="python $baseDir/imap_python3.py"		# All messages
+        getEmailCmd="python3 $baseDir/imap_python3.py"		# All messages
     elif [ $1 = "count" ]
     then
-        getEmailCmd="python $baseDir/imap_python3.py new"	# Just a count of new messages
+        getEmailCmd="python3 $baseDir/imap_python3.py new"	# Just a count of new messages
         excludeThis="Subj:"
     elif [ $1 = "Coz_Say" ]
     then
-        getEmailCmd="python $baseDir/imap_python3.py Coz_Say"  # Direct cozmo to speak these
+        getEmailCmd="python3 $baseDir/imap_python3.py Coz_Say"  # Direct cozmo to speak these
         excludeThis="^You have"
     else
-        getEmailCmd="python $baseDir/imap_python3.py $*"  # Filter by this (these) string(s)...
+        getEmailCmd="python3 $baseDir/imap_python3.py $*"  # Filter by this (these) string(s)...
     fi
 else
-    getEmailCmd="python $baseDir/imap_python3.py new"	# Unread messages
+    getEmailCmd="python3 $baseDir/imap_python3.py new"	# Unread messages
 fi
 
 
@@ -56,7 +57,7 @@ if (($4 == "Subj:") && ($5 == "Coz_Say")) { matched=1; start_at=6; };
 if ($4 == "Subj:") { matched=1; $4 = "Subject"; };
 
 if (matched == 1) {
-    printf "python say.py ";
+    printf "python3 say.py ";
     for (i=start_at;i<= NF;i++) {
 	if ($i != "Subj:") printf " %s", $i;
     }

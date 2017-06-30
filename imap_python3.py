@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ########################################################################
 # Use Python 3 and IMAP to iterate over emails in the Inbox
 #
