@@ -5,6 +5,8 @@
 # HISTORICAL INFORMATION -
 #
 #  2017-06-21  msipin  Attempted to handle "bad SUBJECT lines".
+#  2017-06-29  msipin  Moved email credentials to external file named
+#                      "email_creds.py" (which git is set to ignore)
 ########################################################################
 import sys
 import imaplib
@@ -12,13 +14,9 @@ import getpass
 import email
 import email.header
 import datetime
+from email_creds import *	# Pickup user's email username, password and server
 
 
-# DEAR GOD IN HEAVEN, DON'T GIVE ANYONE THIS FILE WITHOUT
-# CHANGING THE FOLLOWING THREE LINES TO SOMETHING BENIGN -
-EMAIL_SERVER="this.should.be.the.fqdn.of.your.email.server"
-EMAIL_ACCOUNT = "your_user_name@your_domain_name.com"
-EMAIL_PASS="YourPasswordHere"
 
 
 # Folder to read (Usually use 'Inbox')
