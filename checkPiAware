@@ -6,16 +6,49 @@
 #  HISTORICAL INFORMATION -
 #
 #  2017-06-19  msipin  Created.  NOTE: Try to replace curl with wget...
-#  2017-06-30  msipin  Replaced curl with wget. Required python3
+#  2017-06-30  msipin  Replaced curl with wget. Required python3.
+#                      Allowed user to specify host to check, and whether
+#                      or not Cozmo should speak the total out loud
 ################################
 
+quiet=0		# Set to "1" to only display (don't speak) = "be quiet"
 PiAwareHost="192.168.1.123:8080"
+
+# See if user wants us to "be quiet" (aka display results, don't speak them)
+if [ $# -gt 0 -a ""$1"" = "-q" ]
+then
+    # User specified 'quiet' arg
+    quiet=1
+    shift 1
+fi
+
+# If user specified a host, then use it, instead of the default
+if [ $# -gt 0 ]
+then
+    # User specified 'host' arg
+    PiAwareHost=$1
+fi
+
+##echo "DEBUG: quiet=$quiet"
+##echo "DEBUG: PiAwareHost=$PiAwareHost"
+##exit 2
 
 #  sayThis=`curl --silent http://${PiAwareHost}/data/aircraft.json | grep "\"hex\":" | wc -l | awk '{ printf "You are currently tracking %s planes\n",$1 }'`
 sayThis=`wget -q -O - "http://${PiAwareHost}/data/aircraft.json" | grep "\"hex\":" | wc -l | awk '{ printf "You are currently tracking %s planes\n",$1 }'`
 
-#echo $sayThis
-python3 say.py $sayThis
+echo
+
+# Display results
+echo $sayThis
+echo
+
+# Speak results, if not told to "be quiet"
+if [ $quiet -eq "0" ]
+then
+    python3 say.py $sayThis
+    echo
+fi
+
 
 exit 0
 
