@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 # Copyright (c) 2016 Anki, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,6 +25,7 @@ import cozmo
 import asyncio
 import time
 import cozmo
+from voice_params import *	# Pickup defaults for Cozmo's voice
 
 def run(sdk_conn):
     '''The run method runs once Cozmo is connected.'''
@@ -46,7 +46,8 @@ def run(sdk_conn):
         print
         sayThis = input("What would you like me to say? : ")
     
-    robot.say_text(sayThis).wait_for_completed()
+    robot.set_robot_volume(VOICE_DFLT_VOLUME)
+    robot.say_text(sayThis,voice_pitch=VOICE_DFLT_PITCH,duration_scalar=VOICE_DFLT_SCALAR).wait_for_completed()
 
 if __name__ == '__main__':
     cozmo.robot.Robot.drive_off_charger_on_connect = False  # Don't make Cozmo drive off the charger

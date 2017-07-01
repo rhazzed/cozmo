@@ -7,6 +7,7 @@
 #
 #  2017-06-30  msipin  Added this header. Drove a little further each try.
 #                      Made Cozmo say whether he found the charger or not.
+#                      Used default voice_params settings for Cozmo's voice.
 ############################################################################
 
 import sys
@@ -14,6 +15,7 @@ import asyncio
 import time
 import cozmo
 from cozmo.util import degrees, distance_mm, speed_mmps
+from voice_params import *	# Pickup defaults for Cozmo's voice
 
 
 def backup(robot, trial):
@@ -29,10 +31,11 @@ def backup(robot, trial):
 
 	# see if Cozmo already knows where the charger is
 	print("Checking if I am on the charger...")
+	robot.set_robot_volume(VOICE_DFLT_VOLUME)
 	if robot.is_on_charger:
 		print("I am! Yay!")
-		robot.say_text("yay!").wait_for_completed()
-		robot.say_text("I found it!").wait_for_completed()
+		robot.say_text("yay!",voice_pitch=VOICE_DFLT_PITCH,duration_scalar=VOICE_DFLT_SCALAR).wait_for_completed()
+		robot.say_text("I found it!",voice_pitch=VOICE_DFLT_PITCH,duration_scalar=VOICE_DFLT_SCALAR).wait_for_completed()
 	else:
 		print("Nope.. not on the charger =(")
 		print("Trying again...")
@@ -41,8 +44,8 @@ def backup(robot, trial):
 			backup(robot, trial)
 		else:
 			print("I'm getting tired. Giving up =(")
-			robot.say_text("I'm getting tired.").wait_for_completed()
-			robot.say_text("I give up.").wait_for_completed()
+			robot.say_text("I'm getting tired.",voice_pitch=VOICE_DFLT_PITCH,duration_scalar=VOICE_DFLT_SCALAR).wait_for_completed()
+			robot.say_text("I give up.",voice_pitch=VOICE_DFLT_PITCH,duration_scalar=VOICE_DFLT_SCALAR).wait_for_completed()
 
 
 def run(sdk_conn):
