@@ -34,8 +34,9 @@ def backup(robot, trial):
 	robot.set_robot_volume(VOICE_DFLT_VOLUME)
 	if robot.is_on_charger:
 		print("I am! Yay!")
-		robot.say_text("yay!",voice_pitch=VOICE_DFLT_PITCH,duration_scalar=VOICE_DFLT_SCALAR).wait_for_completed()
-		robot.say_text("I found it!",voice_pitch=VOICE_DFLT_PITCH,duration_scalar=VOICE_DFLT_SCALAR).wait_for_completed()
+		robot.set_robot_volume(VOICE_EXCITED_VOLUME)
+		robot.say_text("yay!",voice_pitch=VOICE_EXCITED_PITCH,duration_scalar=VOICE_EXCITED_SCALAR).wait_for_completed()
+		robot.say_text("I found it!",voice_pitch=VOICE_EXCITED_PITCH,duration_scalar=VOICE_EXCITED_SCALAR).wait_for_completed()
 	else:
 		print("Nope.. not on the charger =(")
 		print("Trying again...")
