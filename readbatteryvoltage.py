@@ -7,10 +7,30 @@ import asyncio
 import time
 import cozmo
 
+# On Charger -  (Anything greater than 4.40)
+# 100% full -   Current battery voltage: 4.0799560546875
+# 75% full -    Current battery voltage: 3.85595703125
+# 50% full -    Current battery voltage: 3.72796630859375
+# 25% full -    Current battery voltage: 3.62799072265625
+# ALMOST DEAD - Current battery voltage: 3.48797607421875
+# DEAD -        Current battery voltage: 3.43194580078125
+
+# Presumed "linear" region -
+FULL_BATT = 4.100000
+AD_BATT   = 3.550000
+
 
 def showVoltage(robot):
-	# show the battery voltage
-	print("Current battery voltage: %s" % robot.battery_voltage)
+        # show the battery voltage
+        bv = robot.battery_voltage
+        print("Current battery voltage: %s" % bv)
+        if bv > FULL_BATT:
+            print("Probably on charger")
+        elif bv > AD_BATT:
+            truncVal = float('%.f' % float(bv/FULL_BATT*100.0))
+            print("Estimated: {0}% full".format(truncVal))
+        else:
+            print("**** Need to recharge! ****   ALMOST DEAD!   (Only a few minutes left!)")
 
 
 def run(sdk_conn):
