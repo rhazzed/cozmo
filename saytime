@@ -1,0 +1,6 @@
+#!/bin/sh
+##################################
+# saytime - Have Cozmo speak the time out loud.
+##################################
+
+`time2words.py -m | tail -1 | awk '{ printf "say.py \"The time is , %s\"\n",$0}'`

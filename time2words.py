@@ -5,7 +5,9 @@
 #
 # HISTORICAL INFORMATION -
 #
-#  2017-07-30  msipin  Inspired by the great Physics Denier, Eric P.
+#  2017-07-30  msipin  Inspired by the great Physics Denier, Eric P. Added
+#                      ability to skip speaking the seconds with "-m"
+#                      ("minutes") command-line parameter.
 ############################################################################
 
 import sys
@@ -31,6 +33,10 @@ def n2w(n):
 
 def main(argv):
     # Main function
+    skip_seconds=False
+
+    if (len(sys.argv)>1 and "-m" == sys.argv[1]):
+        skip_seconds=True
 
     # Get current time
     now=datetime.datetime.now()
@@ -52,6 +58,11 @@ def main(argv):
 
     # Hours
     n2w(int(format(EA[0])))
+
+    # If user wants to skip seconds, just set to zero and let
+    # logic below handle it
+    if skip_seconds:
+        EA[2] = "00"
 
     # If both minutes and seconds are zero, don't show them
     if (int(EA[1]) != 0 or int(EA[2]) != 0):
