@@ -10,4 +10,4 @@
 #                      problem w/v.1.5.0/0.14.0 ???)
 ##################################
 
-`time2words.py -m | tail -1 | sed "s/ AM/ ay em/" | awk '{ printf "say.py \"The time is , %s\"\n",$0}'`
+`python3 time2words.py -m | tail -1 | sed "s/ AM/ ay em/" | awk '{ printf "python3 say.py \"The time is , %s\"\n",$0}'`
