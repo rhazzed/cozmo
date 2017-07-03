@@ -1,0 +1,47 @@
+#######################
+# THIS FILE IS AN EXAMPLE FILE - Change its name from
+#   "email_creds.conf.EXAMPLE" to just "email_creds.conf" and
+#   then change the values below to reflect your actual
+#   email server(s), username(s) and password(s). Add as many
+#   acounts as you like. The "defaul" section should specify
+#   which account to use by default
+#######################
+# email_creds.conf - This file stores a user's email credentials.
+#    CAUTION: NEVER COMMIT THIS FILE TO github!!!
+#    CAUTION: This file must be made read-only by the user that
+#             is allowed to read this account's email!
+#######################
+
+# DEAR GOD IN HEAVEN, DON'T GIVE ANYONE THIS FILE WITHOUT CHANGING
+# ALL OF THE CREDENTIAL LINES TO SOMETHING BENIGN!!!!
+
+[default]
+# Whatever you specify here will be the default
+# email account to use -
+account = gmail
+
+
+[bse]
+# BSE -
+email_server = whatever.example.com
+email_account = put_your_bse_username_here@example.com
+email_pass = put_your_bse_password_here
+
+[gmail]
+# GMAIL -
+email_server = imap.gmail.com
+email_account = put_your_gmail_username_here@gmail.com
+email_pass = put_your_gmail_password_here
+
+[aol]
+# AOL -
+email_server = imap.aol.com
+email_account = put_your_aol_username_here@aol.com
+email_pass = put_your_aol_password_here
+
+[yahoo]
+# Yahoo -
+email_server = imap.mail.yahoo.com
+email_account = put_your_yahoo_username_here@yahoo.com
+email_pass = put_your_yahoo_password_here
+

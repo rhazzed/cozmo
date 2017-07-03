@@ -7,6 +7,8 @@
 #  2017-06-21  msipin  Attempted to handle "bad SUBJECT lines".
 #  2017-06-29  msipin  Moved email credentials to external file named
 #                      "email_creds.py" (which git is set to ignore)
+#  2017-07-02  msipin  Allowed user to specify which account they want
+#                      to use from the (new) email_creds.conf file.
 ########################################################################
 import sys
 import imaplib
@@ -14,7 +16,12 @@ import getpass
 import email
 import email.header
 import datetime
-from email_creds import *	# Pickup user's email username, password and server
+
+try:
+    import configparser
+except ImportError:
+    print("\nERROR: Can't find 'configparser'.  Try performing 'sudo pip3 install ConfigParser'\n")
+    sys.exit(-1)
 
 
 
@@ -62,23 +69,94 @@ def process_mailbox(M,filter):
             print ("        Date:", \
                 local_date.strftime("%a, %d %b %Y %H:%M:%S"))
 
+def ConfigSectionMap(section):
+    dict1 = {}
+    options = Config.options(section)
+    for option in options:
+        try:
+            dict1[option] = Config.get(section, option)
+            if dict1[option] == -1:
+                DebugPrint("skip: %s" % option)
+        except:
+            print("exception on %s!" % option)
+            dict1[option] = None
+    return dict1
+
+
 
 ########################## Start of (anonymous) program ##########################
+
+# If user does not specify which account, the default
+# account will be used, and the argBase value should
+# be set to "argument 1"
+argBase=1
+
+############## DEFINE EMAIL CREDS (and from what account) ############## 
+Config = configparser.ConfigParser()
+Config.read("email_creds.conf")
+print(Config.sections())
+
+# If user specified an account, pick it up
+if (len(sys.argv)>2 and "-a" == sys.argv[1]):
+    # User wants to override default
+    # so pick it up!
+    acct=sys.argv[2]
+
+    # Advance the argument base beyond both the
+    # command-line-argument flag and its parameter
+    argBase += 2
+
+else:
+    # Figure out what the default account is
+    acct=ConfigSectionMap("default")['account']
+
+#print("DEBUG: Account = [{0}]".format(acct))
+
+# Establish email server + credentials...
+EMAIL_SERVER="undefined"
+EMAIL_ACCOUNT="undefined"
+EMAIL_PASS="undefined"
+
+try:
+    try:
+        EMAIL_SERVER=ConfigSectionMap(acct)['email_server']
+    except KeyError:
+        print("\nERROR: No value for [{0}][email_server] in config file\n".format(acct))
+        sys.exit(-1)
+    try:
+        EMAIL_ACCOUNT=ConfigSectionMap(acct)['email_account']
+    except KeyError:
+        print("\nERROR: No value for [{0}][email_account] in config file\n".format(acct))
+        sys.exit(-1)
+    try:
+        EMAIL_PASS=ConfigSectionMap(acct)['email_pass']
+    except KeyError:
+        print("\nERROR: No value for [{0}][email_pass] in config file\n".format(acct))
+        sys.exit(-1)
+except configparser.NoSectionError:
+    print("\nERROR: No account called [{0}] in config file\n".format(acct))
+    sys.exit(-1)
+
+#print("DEBUG: EMAIL_SERVER=[{0}]".format(EMAIL_SERVER))
+#print("DEBUG: EMAIL_ACCOUNT=[{0}]".format(EMAIL_ACCOUNT))
+#print("DEBUG: EMAIL_PASS=[{0}]".format(EMAIL_PASS))
+
 M = imaplib.IMAP4_SSL(EMAIL_SERVER)
 
 filter="ALL"		# Everything in the current folder
 
-if len(sys.argv)>1 and sys.argv[1] == "all":
+
+if len(sys.argv)>argBase and sys.argv[argBase] == "all":
     filter = "ALL"
-elif len(sys.argv)>1 and sys.argv[1] == "new":
+elif len(sys.argv)>argBase and sys.argv[argBase] == "new":
     filter = "UNSEEN"
-elif len(sys.argv)>1:
+elif len(sys.argv)>argBase:
     filter = '(SUBJECT "'
-    for i in range(1,len(sys.argv)):
-        if (i>1): filter += " "
+    for i in range(argBase,len(sys.argv)):
+        if (i>argBase): filter += " "
         filter += sys.argv[i]
     filter += '")'
-#print("Filter = [{0}]", filter)
+print("Filter = [{0}]", filter)
 
 try:
     ##rv, data = M.login(EMAIL_ACCOUNT, getpass.getpass())
@@ -105,3 +183,4 @@ else:
 M.logout()
 
 print ("\n")
+
