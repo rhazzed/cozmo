@@ -3,4 +3,4 @@
 # saybattery - Have Cozmo speak how "full" his battery is (in percent)
 ##################################
 
-`readbatteryvoltage.py -f | awk '{ printf "say.py \"My battery is  %0.f percent full\"\n",$0}'`
+`python3 readbatteryvoltage.py -f | awk '{ printf "say.py \"My battery is  %0.f percent full\"\n",$0}'`
