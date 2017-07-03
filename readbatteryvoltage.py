@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
-
-# Read and display Cozmo's current battery voltage.
+############################################################################
+# readbatteryvoltage.py - Read and display Cozmo's current battery voltage.
+#
+# HISTORICAL INFORMATION -
+#
+#  2017-07-02  msipin  Added this header. Added ability to only display
+#                      the percent full with a "-f" ("full") command-line
+#                      parameter.
+############################################################################
 
 import sys
 import asyncio
@@ -19,15 +26,21 @@ import cozmo
 FULL_BATT = 4.100000
 AD_BATT   = 3.550000
 
+pct_full_only=False
 
 def showVoltage(robot):
+
+    bv = robot.battery_voltage
+    truncVal = float('%.f' % float(bv/FULL_BATT*100.0))
+
+    if pct_full_only:
+        print("{0}".format(truncVal))
+    else:
         # show the battery voltage
-        bv = robot.battery_voltage
         print("Current battery voltage: %s" % bv)
         if bv > FULL_BATT:
             print("Probably on charger")
         elif bv > AD_BATT:
-            truncVal = float('%.f' % float(bv/FULL_BATT*100.0))
             print("Estimated: {0}% full".format(truncVal))
         else:
             print("**** Need to recharge! ****   ALMOST DEAD!   (Only a few minutes left!)")
@@ -48,6 +61,9 @@ def run(sdk_conn):
 if __name__ == '__main__':
     #cozmo.setup_basic_logging()
     cozmo.robot.Robot.drive_off_charger_on_connect = False  # Cozmo can stay on charger for now
+
+    if (len(sys.argv)>1 and "-f" == sys.argv[1]):
+        pct_full_only=True
 
     try:
         # Connect WITHOUT displaying what Cozmo sees -

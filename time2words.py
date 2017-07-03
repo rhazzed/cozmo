@@ -5,8 +5,8 @@
 #
 # HISTORICAL INFORMATION -
 #
-#  2017-07-30  msipin  Inspired by the great Physics Denier, Eric P. Added
-#                      ability to skip speaking the seconds with "-m"
+#  2017-07-02  msipin  Inspired by the great Physics Denier, Eric P.
+#                      Added ability to skip speaking the seconds with "-m"
 #                      ("minutes") command-line parameter.
 ############################################################################
 
