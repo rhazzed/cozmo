@@ -1,6 +1,13 @@
 #!/bin/sh
 ##################################
 # saytime - Have Cozmo speak the time out loud.
+#
+# HISTORICAL INFORMATION -
+#
+#  2017-07-02  msipin  Adapted to Cozmo not speaking "AM" correctly.
+#                      (NOTE: MAY (?) have something to do with the
+#                      1.6.0/0.15.0 API, as I don't think it had a
+#                      problem w/v.1.5.0/0.14.0 ???)
 ##################################
 
-`time2words.py -m | tail -1 | awk '{ printf "say.py \"The time is , %s\"\n",$0}'`
+`time2words.py -m | tail -1 | sed "s/ AM/ ay em/" | awk '{ printf "say.py \"The time is , %s\"\n",$0}'`

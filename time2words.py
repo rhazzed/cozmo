@@ -57,6 +57,9 @@ def main(argv):
         EA[0] = int(EA[0]) - 12
 
     # Hours
+    if (int(EA[0]) == 0):
+        EA[0] = int(EA[0]) + 12
+
     n2w(int(format(EA[0])))
 
     # If user wants to skip seconds, just set to zero and let
