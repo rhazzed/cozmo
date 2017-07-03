@@ -8,6 +8,8 @@
 #  2017-06-30  msipin  Added this header. Drove a little further each try.
 #                      Made Cozmo say whether he found the charger or not.
 #                      Used default voice_params settings for Cozmo's voice.
+#  2017-07-02  msipin  Stopped saying "Yay!" when finds charger - couldn't
+#                      understand it, anyway.
 ############################################################################
 
 import sys
@@ -35,7 +37,6 @@ def backup(robot, trial):
 	if robot.is_on_charger:
 		print("I am! Yay!")
 		robot.set_robot_volume(VOICE_EXCITED_VOLUME)
-		robot.say_text("yay!",voice_pitch=VOICE_EXCITED_PITCH,duration_scalar=VOICE_EXCITED_SCALAR).wait_for_completed()
 		robot.say_text("I found it!",voice_pitch=VOICE_EXCITED_PITCH,duration_scalar=VOICE_EXCITED_SCALAR).wait_for_completed()
 	else:
 		print("Nope.. not on the charger =(")
