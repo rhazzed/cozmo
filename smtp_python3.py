@@ -57,7 +57,7 @@ argBase=1
 ############## DEFINE EMAIL CREDS (and from what account) ############## 
 Config = configparser.ConfigParser()
 Config.read("email_creds.conf")
-print(Config.sections())
+#print(Config.sections())
 
 # If user specified an account, pick it up
 if (len(sys.argv)>2 and "-a" == sys.argv[1]):
@@ -73,7 +73,7 @@ else:
     # Figure out what the default account is
     acct=ConfigSectionMap("default")['account']
 
-print("DEBUG: Account = [{0}]".format(acct))
+#print("DEBUG: Account = [{0}]".format(acct))
 
 # Establish the "default email subject"
 msg_subject = "Cozmo Email via BSE" 
@@ -89,12 +89,7 @@ if (len(sys.argv)>(argBase+2) and "-s" == sys.argv[argBase]):
     argBase += 2
 
 
-print("DEBUG: Subject = [{0}]".format(msg_subject))
-
-sys.exit(1)
-
-
-
+#print("DEBUG: Subject = [{0}]".format(msg_subject))
 
 
 
