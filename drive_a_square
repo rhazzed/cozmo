@@ -1,0 +1,31 @@
+#!/bin/sh
+#############################################
+# drive_a_square - Drive a perfect square, as many inches on a side as
+#                  specified by the user
+#
+# HISTORICAL INFORMATION -
+#
+#  2017-07-03  msipin  Created to test do_drive.py and do_turn.py
+##############################################
+
+usage()
+{
+	echo
+	echo "usage: $0 <inches_per_side>"
+	echo
+}
+
+if [ $# != 1 ]
+then
+	usage
+	exit 1
+fi
+
+for i in 1 2 3 4
+do
+	python3 do_drive.py $1
+	python3 do_turn.py 90
+done
+
+exit 0
+
