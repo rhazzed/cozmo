@@ -23,25 +23,29 @@ account = gmail
 
 [bse]
 # BSE -
-email_server = whatever.example.com
+email_server_imap = imap.example.com
+email_server_smtp = smtp.example.com
 email_account = put_your_bse_username_here@example.com
 email_pass = put_your_bse_password_here
 
 [gmail]
 # GMAIL -
-email_server = imap.gmail.com
+email_server_imap = imap.gmail.com
+email_server_smtp = smtp.gmail.com
 email_account = put_your_gmail_username_here@gmail.com
 email_pass = put_your_gmail_password_here
 
 [aol]
 # AOL -
-email_server = imap.aol.com
+email_server_imap = imap.aol.com
+email_server_smtp = smtp.aol.com
 email_account = put_your_aol_username_here@aol.com
 email_pass = put_your_aol_password_here
 
 [yahoo]
 # Yahoo -
-email_server = imap.mail.yahoo.com
+email_server_imap = imap.mail.yahoo.com
+email_server_smtp = smtp.mail.yahoo.com
 email_account = put_your_yahoo_username_here@yahoo.com
 email_pass = put_your_yahoo_password_here
 

@@ -119,9 +119,9 @@ EMAIL_PASS="undefined"
 
 try:
     try:
-        EMAIL_SERVER=ConfigSectionMap(acct)['email_server']
+        EMAIL_SERVER=ConfigSectionMap(acct)['email_server_imap']
     except KeyError:
-        print("\nERROR: No value for [{0}][email_server] in config file\n".format(acct))
+        print("\nERROR: No value for [{0}][email_server_imap] in config file\n".format(acct))
         sys.exit(-1)
     try:
         EMAIL_ACCOUNT=ConfigSectionMap(acct)['email_account']
