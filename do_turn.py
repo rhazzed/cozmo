@@ -6,6 +6,10 @@
 # HISTORICAL INFORMATION -
 #
 #  2017-07-03  msipin  Derived from backupTillCharging.py
+#  2017-07-04  msipin  Set Cozmo to stay on the charger if he's already
+#                      there. (The default "drive off the charger" behavior
+#                      does not adequately clear the charger to allow him
+#                      to safely turn thereafter.)
 ############################################################################
 
 import sys
@@ -70,7 +74,7 @@ def run(sdk_conn):
 
 if __name__ == '__main__':
     cozmo.setup_basic_logging()
-    cozmo.robot.Robot.drive_off_charger_on_connect = True # Coz should drive off the charger, if needed
+    cozmo.robot.Robot.drive_off_charger_on_connect = False # Coz should stay on the charger, if he's there
 
 
     if len(sys.argv) < 2:
