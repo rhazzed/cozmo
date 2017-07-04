@@ -5,12 +5,15 @@
 # HISTORICAL INFORMATION -
 #
 #  2017-07-03  msipin  Created.
+#                      Added ability to specify subject using
+#                      the "-s" command-line argument.
 ############################################################
 
 ####################3
 # EXAMPLE USAGE -
 #   smtp_python3.py eric@whatever.com "This text here will be in the body of the email."
 #   smtp_python3.py -a yahoo eric@whatever.com "This text here will be in the body of the email."
+#   smtp_python3.py -a yahoo -s "This is the Subject" eric@whatever.com "This is the body of the email."
 #   smtp_python3.py eric@whatever.com A b c d e f g the_end
 #   smtp_python3.py -a gmail mike@youknowit.com `cat message.txt`
 #     -- where "message.txt" is a text file contining the
@@ -70,7 +73,31 @@ else:
     # Figure out what the default account is
     acct=ConfigSectionMap("default")['account']
 
-#print("DEBUG: Account = [{0}]".format(acct))
+print("DEBUG: Account = [{0}]".format(acct))
+
+# Establish the "default email subject"
+msg_subject = "Cozmo Email via BSE" 
+
+# If user specified an email Subject line, pick it up
+if (len(sys.argv)>(argBase+2) and "-s" == sys.argv[argBase]):
+    # User wants to override default
+    # so pick it up!
+    msg_subject=sys.argv[argBase+1]
+
+    # Advance the argument base beyond both the
+    # command-line-argument flag and its parameter
+    argBase += 2
+
+
+print("DEBUG: Subject = [{0}]".format(msg_subject))
+
+sys.exit(1)
+
+
+
+
+
+
 
 # Establish email server + credentials...
 EMAIL_SERVER="undefined"
@@ -119,7 +146,7 @@ for i in range(argBase+1,len(sys.argv)):
     text += sys.argv[i]
 
 msg = MIMEText(text, 'plain')
-msg['Subject'] = "Cozmo Email via BSE" 
+msg['Subject'] = msg_subject
 from_email = EMAIL_ACCOUNT
 msg['To'] = to_email
 
