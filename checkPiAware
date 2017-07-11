@@ -9,6 +9,8 @@
 #  2017-06-30  msipin  Replaced curl with wget. Required python3.
 #                      Allowed user to specify host to check, and whether
 #                      or not Cozmo should speak the total out loud
+#  2017-07-11  msipin  Moved display of planes to *after* Cozmo speaks
+#                      just for grins.
 ################################
 
 quiet=0		# Set to "1" to only display (don't speak) = "be quiet"
@@ -38,16 +40,16 @@ sayThis=`wget -q -O - "http://${PiAwareHost}/data/aircraft.json" | grep "\"hex\"
 
 echo
 
-# Display results
-echo $sayThis
-echo
-
 # Speak results, if not told to "be quiet"
 if [ $quiet -eq "0" ]
 then
     python3 say.py $sayThis
     echo
 fi
+
+# Display results
+echo $sayThis
+echo
 
 
 exit 0

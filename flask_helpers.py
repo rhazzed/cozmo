@@ -17,6 +17,9 @@
 Flask is a Python web framework. remote_control_cozmo.py and other scripts may use
 these utility functions to interact with a web browser.
 '''
+################################
+#  2017-07-11  msipin  Started flask server in multithreaded mode.
+################################
 
 import logging
 import sys
@@ -72,7 +75,7 @@ def run_flask(flask_app, host_ip="127.0.0.1", host_port=5000, enable_flask_loggi
         # before the webpage requests any data
         _delayed_open_web_browser("http://" + host_ip + ":" + str(host_port), delay=open_page_delay)
 
-    flask_app.run(host=host_ip, port=host_port, use_evalex=False)
+    flask_app.run(host=host_ip, port=host_port, use_evalex=False, threaded=True)
 
 
 def make_uncached_response(in_file):

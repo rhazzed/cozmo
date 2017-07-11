@@ -18,6 +18,10 @@
 
 This example lets you control Cozmo by Remote Control, using a webpage served by Flask.
 '''
+################################
+#  2017-07-11  msipin  (Temporarily) Turned off image annotations, as it was throwing an
+#                      error (possibly an HTML error?) when running on an Odroid XU4.
+################################
 
 import json
 import sys
@@ -94,7 +98,8 @@ remote_control_cozmo = None
 _default_camera_image = create_default_image(320, 240)
 _is_mouse_look_enabled_by_default = False
 
-_display_debug_annotations = DEBUG_ANNOTATIONS_ENABLED_ALL
+#  _display_debug_annotations = DEBUG_ANNOTATIONS_ENABLED_ALL
+_display_debug_annotations = DEBUG_ANNOTATIONS_DISABLED 
 
 
 def remap_to_range(x, x_min, x_max, out_min, out_max):
