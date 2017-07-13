@@ -22,14 +22,22 @@ Watch Cozmo's video feed
 import sys
 import cozmo
 import asyncio
-import time
+from time import sleep
+from threading import Thread
 import cozmo
 from PIL import Image, ImageDraw
+
+counter=0
+last_counter=0
 
 
 # Annotator for displaying RobotState (position, etc.) on top of the camera feed
 class RobotStateDisplay(cozmo.annotate.Annotator):
     def apply(self, image, scale):
+        global counter
+
+
+        counter += 1
         d = ImageDraw.Draw(image)
 
         bounds = [3, 0, image.width, image.height]
@@ -66,12 +74,31 @@ def run(sdk_conn):
     robot = sdk_conn.wait_for_robot()
     robot.world.image_annotator.add_annotator('robotState', RobotStateDisplay)
     print
-    sayThis = input("Press <Enter> when you wish to exit this program...")
+    input("Press <Enter> when you wish to exit this program...")
     print
+
     
 
 if __name__ == '__main__':
-    cozmo.robot.Robot.drive_off_charger_on_connect = False  # Don't make Cozmo drive off the charger
+    cozmo.robot.Robot.drive_off_charger_on_connect = True
+
+
+    def _call_me(arg1, arg2):
+        global counter
+        global last_counter
+
+        while True:
+            print("Loop counter: {0} (FPS: {1})".format(counter,counter-last_counter))
+            last_counter = counter
+            sleep(1)
+
+    thread = Thread(target=_call_me,
+                    kwargs=dict(arg1="Hello", arg2="There"))
+    thread.daemon = True # Force to quit on main quitting
+    thread.start()
+
+
+
 
     try:
             cozmo.setup_basic_logging()
