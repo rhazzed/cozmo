@@ -1,0 +1,85 @@
+Ubuntu 16.04    7/14/17
+
+### PYTHON INSTALLATION (as root) ###
+(anki directions) http://cozmosdk.anki.com/docs/install-linux.html
+
+Below are modified direction we found to overcome some install hurdles.. because nothing ever goes perfect!
+
+sudo apt-get update
+sudo apt-get install python3
+
+# Install pip
+sudo apt install python3-pip
+
+# Install Tkinter
+sudo apt-get install python3-pil.imagetk
+
+### SDK INSTALLATION (as user/no sudo) ###
+pip3 install --user 'cozmo[camera]'
+
+** if you get a build error stating zlib is missing header files, install the following and try again **
+sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
+
+# SDK upgrade
+pip3 install --user --upgrade cozmo
+
+# Optional (but recommended) Flask Install
+pip3 install --user flask
+
+
+### ADB INSTALLATION FOR 32 bit (i.e Odroid) (as root) ###
+sudo apt-get install andoid-tools-adb android-tools-fastboot
+For 64 bit,  skip to next step
+
+###  ADB INSTALLATION (64 bit i.e. Pi3) (as root) ###
+(original anki directions) http://cozmosdk.anki.com/docs/adb.html#adb
+
+
+Download: https://dl.google.com/android/repository/platform-tools-latest-windows.zip
+
+#create install folder
+cd ~
+mkdir android-sdk-linux
+
+#move zip to install folder and extract
+mv Downloads/platform-tools-latest-windows.zip android-sdk-linux
+extraxt platform-tools-latest-windows.zip IN android-sdk-linux folder
+
+#check to see if adb is present
+cd android-sdk-linux/platform-tools
+ls adb
+
+Add PATH to .bashrc (user)
+export PATH=${PATH}:~/android-sdk-linux/platform-tools
+
+#save .bashrc and load
+source .bashrc
+
+#confirm adb is in path
+which adb    (should display adb path)
+
+###  ANDROID DEVICE SETUP ###
+Tap seven (7) times on the Build Number listed under Settings -> About Phone.
+Then, under Settings -> Developer Options, enable USB debugging.
+
+#in Ubuntu, type:
+adb devices
+There should be atleast 1 device found. 
+If not, check your ADB installation, enable USB debugging and plug phone in to Odroid!
+
+Success Example:
+List of devices attached
+88148a08    device
+
+if output shows "unauthorized" instead of "device" you need to approve the fingerprint access on you phone  (look for popup window on your phone)
+
+### INSTALL DONE! ###
+
+Put Cozmo on charging dock
+Connect Android device to Cozmo's wifi
+Start Cozmo app on Android device
+Once connected, go in Cozmo app settings and enable SDK
+Enjoy  :)
+
+
+
