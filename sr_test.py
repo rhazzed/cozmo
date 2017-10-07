@@ -14,15 +14,21 @@ for i in range(p.get_device_count()):
 print("\n")
 
 r = sr.Recognizer()
-with sr.Microphone(device_index=micIdx) as source:
-    print("Listening...")
-    audio = r.listen(source)
-    print("Finished listening. Starting recognition...")
+while True:
+    with sr.Microphone(device_index=micIdx) as source:
+        answr = input("Press <Enter> when you want to start listening (or 'q' to Quit): ")
+        if answr == "q":
+            break
+        print("Listening...")
+        audio = r.listen(source)
+        print("Finished listening. Starting recognition...")
 
-try:
-    #print("You said " + r.recognize_google(audio))
-    #print("You said " + r.recognize_wit(audio))
-    print("        ")
-    print("    " + r.recognize_sphinx(audio))
-except LookupError:
-    print("Could not understand audio")
+    try:
+        #print("         " + r.recognize_google(audio))
+        #print("         " + r.recognize_wit(audio))
+        print("    " + r.recognize_sphinx(audio))
+    except LookupError:
+        print("Could not understand audio")
+    print("")
+
+print("\nExiting\n")
