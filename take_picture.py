@@ -12,12 +12,13 @@ import requests
 import io
 import asyncio
 from PIL import Image, ImageDraw
+from time import sleep
 
 
 
 def analyze_image(image_data):
     '''Process image'''
-    newfile = open('test.png', 'wb')
+    newfile = open('test.jpeg', 'wb')
     newfile.write(image_data)
     newfile.close()
     return "Ok"
@@ -27,6 +28,7 @@ def do_photo(robot: cozmo.robot.Robot):
     print("Waiting for a picture...")
     robot.camera.color_image_enabled = True
     robot.camera.image_stream_enabled = True
+    sleep(2) # Give camera time to switch to color
 
 
     # wait for a new camera image to ensure it is captured properly
@@ -34,12 +36,12 @@ def do_photo(robot: cozmo.robot.Robot):
     print("Found a picture, capturing the picture.")
 
     # store the image
-    latest_image = robot.world.latest_image.raw_image.convert("RGB")
+    latest_image = robot.world.latest_image.raw_image.convert("YCbCr")
     print("Captured picture. Converting Picture.")
 
     if latest_image is not None:
         in_mem_file = io.BytesIO()
-        latest_image.save(in_mem_file, format = "PNG")
+        latest_image.save(in_mem_file, format = "JPEG")
         # reset file pointer to start
         in_mem_file.seek(0)
         img_bytes = in_mem_file.read()
