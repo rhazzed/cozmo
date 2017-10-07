@@ -17,6 +17,8 @@
 
 Watch Cozmo's video feed
 
+2017-10-07  Team Rhazz   Using latest SDK, now streaming video in color!
+
 '''
 
 import sys
@@ -49,6 +51,7 @@ class RobotStateDisplay(cozmo.annotate.Annotator):
             bounds[1] += TEXT_HEIGHT
 
         robot = self.world.robot
+        robot.camera.color_image_enabled = True
 
         # Display the Pose info for the robot
 
