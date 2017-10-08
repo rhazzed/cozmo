@@ -2,6 +2,8 @@
 
 import pyaudio
 import speech_recognition as sr
+from oauth2client.client import GoogleCredentials
+credentials = GoogleCredentials.get_application_default()
 
 p = pyaudio.PyAudio()
 micIdx=0
@@ -25,10 +27,14 @@ while True:
 
     try:
         #print("         " + r.recognize_google(audio))
-        #print("         " + r.recognize_wit(audio))
-        print("    " + r.recognize_sphinx(audio))
-    except LookupError:
-        print("Could not understand audio")
+        #print("         " + r.recognize_wit(audio))	# Did not try - didn't get API key either...
+        #
+        # THE FOLLOWING WORKS (Sphinx)! - 
+        #print("    " + r.recognize_sphinx(audio))	# WORKS!
+        #
+        print("    " + r.recognize_google_cloud(audio))
+    except:
+        print("\t<<Could not understand audio>>")
     print("")
 
 print("\nExiting\n")
