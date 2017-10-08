@@ -19,7 +19,7 @@ while True:
         answr = input("Press <Enter> when you want to start listening (or 'q' to Quit): ")
         if answr == "q":
             break
-        print("Listening...")
+        print("\nListening...")
         audio = r.listen(source)
         print("Finished listening. Starting recognition...")
 
