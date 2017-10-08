@@ -1,0 +1,273 @@
+  824  pip3 install SpeechRecognition
+  825  whoami
+  826  sudo pip3 install SpeechRecognition
+  827  python3 -m speech_recognition
+  828  sudo pip3 install pyaudio
+  829  sudo -s
+  830  python3 -m speech_recognition
+  831  sudo python3 -m speech_recognition
+  832  sudo -s
+  833  pip3 install pyaudio
+  834  python3 -m speech_recognition
+  835  pip3 install SpeechRecognition
+  836  python3 -m speech_recognition
+  837  python3 -m speech_recognition -h
+  838  vi /usr/share/alsa/alsa.conf
+  839  dmesg
+  840  lsusb
+  841  alsamixer
+  842  vi /usr/share/alsa/alsa.conf
+  843  locate alsa-base
+  844  locate alsa-base.confi
+  845  locate alsa-base.conf
+  846  vi /etc/modprobe.d/alsa-base.conf
+  847  reboot
+
+  849  ls -ralt
+  850  sudo -s
+  851  history
+  852  python3 -m speech_recognition
+  853  alsamixer
+  854  dmesg
+  855  history
+  856  vi /etc/modprobe.d/alsa-base.conf
+  857  reboot
+
+  859  sudo -s
+  860  alsamixer
+  861  dmesg
+  862  alsamixer
+  863  vi /etc/modprobe.d/alsa-base.conf
+  864  reboot
+  865  htop
+
+  867  sudo -s
+  868  alsamixer
+  869  dmesg
+  870  history
+  871  python3 -m speech_recognition
+  872  ls -ralt
+ 
+  874  ls -ralt
+  875  vi /etc/modprobe.d/alsa-base.conf
+  876  python3 -m speech_recognition
+  877  vi /etc/modprobe.d/alsa-base.conf
+  878  python3 -m speech_recognition
+  879  reboot
+ 
+  881  sudo -s
+  882  dmesg
+  883  alsamixer
+  884  python3 -m speech_recognition
+  885  locate mpd.conf
+  886  updatedb
+  887  locate mpd.conf
+  888  vi /etc/modprobe.d/alsa-base.conf
+  889  lsusb
+  890  aplay -l
+  891  arecord -l
+  892  ls -rlat
+  893  python3 -m unittest discover --verbose
+  894  alsactl store
+  895  cat /proc/asound/cards
+  896  vi /etc/modprobe.d/alsa-base.conf
+  897  reboot
+  898  su
+  899  apt-get install locate
+  900  sudo apt-get install locate
+  901  sudo updatedb
+
+  903  su
+
+  905  sudo -s
+  906  alsamixer
+  907  history
+  908  python3 -m speech_recognition
+  909  dmesg
+  910  dmesg | grep usb
+  911  vi show_mic.py
+  912  chmod 755 show_mic.py
+  913  ls -ralt
+ 
+  915  ls -rlat
+  916  show_mic.py
+  917  export PATH=.:$PATH
+  918  show_mic.py
+  919  vi show_mic.py
+ 
+  921  python3 show_mic.py
+  922  ls -ralt
+  923  cp show_mic.py sr_test.py
+  924  vi sr_test.py
+  925  sr_test.py
+  926  python3 sr_test.py
+ 
+  928  ls -ralt
+  929  vi take_picture.py show_mic.py sr_test.py
+  930  vi sr_test.py
+  931  sr_test.py
+  932  vi sr_test.py 
+  933  sr_test.py
+  934  vi sr_test.py 
+  935  sr_test.py
+  936  vi sr_test.py 
+  937  sr_test.py
+  938  vi sr_test.py 
+  939  sr_test.py
+  940  vi sr_test.py 
+  941  sr_test.py 
+  942  vi sr_test.py 
+  943  sr_test.py 
+  944  vi sr_test.py 
+  945  sr_test.py 
+  946  vi sr_test.py 
+  947  sr_test.py 
+  948  vi sr_test.py 
+  949  sr_test.py 
+  950  vi sr_test.py 
+  951  sr_test.py 
+ 
+  956  alsactl store
+  957  ls -rlat
+  958  sr_test.py 
+  959  ls -ralt
+  960  show_mic.py
+  961  ls -rlat
+  962  vi sr_test.py
+  963  aplay -l
+  964  arecord -l
+  965  ls -ralt
+ 
+  967  vi /usr/share/alsa/alsa.conf /etc/modprobe.d/alsa-base.conf
+  968  vi /usr/share/alsa/alsa.conf
+  969  locate asound.conf
+  970  vi /etc/asound.conf
+  971  reboot
+  972  alsamixer
+  973  su
+  974  ls -ralt
+ 
+  976  sr_test.py
+  977  export PATH=.:$PATH
+  978  sr_test.py
+  979  vi /etc/asound.conf
+ 
+ 
+  982  aplay -l
+  983  arecord -l
+  984  vi /etc/asound.conf
+  985  show_mic.py
+  986  sr_test.py 
+ 
+ 
+  989  alsactl store
+  990  sr_test.py 
+  991  alsactl store
+ 
+  993  sudo -s
+ 
+  995  sr_test.py 
+  996  aplay -l
+  997  arecord -l
+ 
+  999  ls -ralt
+ 1000  show_mic.py
+
+ 1002  sudo -s
+ 1003  su
+ 1004  pulseaudio -D
+ 1005  pulseaudio --system -D
+ 1006  show_mic.py
+ 1007  export PATH=.:$PATH
+ 1008  aplay -l
+ 1009  arecord -l
+ 1010  show_mic.py 
+ 1011  sr_test.py 
+ 1012  ls -rlat
+ 1013  l s-rlat
+ 1014  ls -ralt
+ 1015  show_mic.py
+ 1016  history
+ 1017  killall pulseaudio
+
+ 1019  show_mic.py
+ 1020  ls -ralt
+ 1021  sr_test.py
+ 1022  ls -rlat
+ 1023  vi sr_test.py
+ 1024  sr_test.py 
+ 1025  vi sr_test.py
+ 1026  sr_test.py 
+ 1027  vi sr_test.py
+ 1028  sr_test.py 
+ 1029  vi sr_test.py
+ 1030  sr_test.py 
+ 1031  vi sr_test.py
+ 1032  sr_test.py 
+ 1033  show_mic.py 
+ 1034  ls -ralt
+ 1035  show_mic.py
+ 1036  show_mic.py 
+ 1037  sr_test.py 
+ 1038  vi sr_test.py
+ 1039  sr_test.py 
+ 1040  vi sr_test.py
+ 1041  sr_test.py 
+ 1042  vi sr_test.py
+ 1043  sr_test.py 
+ 1044  vi sr_test.py
+ 1045  sr_test.py 
+ 1046  locate Microphone
+ 1047  updatedb
+ 1048  locate Microphone
+ 1049  vi sr_test.py
+ 1050  locate speech_recog
+ 1051  pushd /usr/local/lib/python3.5/dist-packages/speech_recognition/flac-linux-x86_64
+ 1052  ls -ralt
+ 1053  pushd /usr/local/lib/python3.5/dist-packages/speech_recognition/flac-linux-x86_64
+ 1054  pushd /usr/local/lib/python3.5/dist-packages/speech_recognition
+ 1055  ls -ralt
+
+ 1057  vi __init__.py 
+ 1058  popd
+ 1059  ls -rlat
+ 1060  vi sr_test.py
+ 1061  sr_test.py 
+ 1062  locate pa_linux_alsa.c
+ 1075  sr_test.py 
+ 1076  vi +441 /usr/local/lib/python3.5/dist-packages/pyaudio.py
+ 
+ 1097  python3
+ 1098  locate pyaudio
+ 1099  vi /usr/local/lib/python3.5/dist-packages/pyaudio.py
+ 1100  vi sr_test.py 
+ 1101  sr_test.py 
+ 1102  vi sr_test.py 
+ 1103  vi /usr/local/lib/python3.5/dist-packages/pyaudio.py
+ 1104  locate alsa.conf
+ 1105  vi /usr/share/alsa/pulse-alsa.conf
+ 1106  sr_test.py 
+ 1107  vi /usr/share/alsa/pulse-alsa.conf
+ 1108  sr_test.py 
+ 1109  cat /etc/groups
+ 1110  cat /etc/group
+ 1111  grep audio /etc/group
+ 1113  adduser root audio
+ 1115  exit
+
+ 1126  vi /etc/modprobe.d/alsa-base.conf 
+ 1127  sr_test.py 
+ 1128  vi sr_test.py 
+ 1129  sr_test.py 
+ 1130  vi sr_test.py 
+ 1131  sr_test.py 
+ 1132  vi sr_test.py 
+ 1133  sr_test.py 
+ 1134  vi sr_test.py 
+ 1135  sr_test.py 
+ 1136  vi sr_test.py 
+ 1137  sr_test.py 
+
+ 1141  alsactl store
+ 1142  sr_test.py 
+
