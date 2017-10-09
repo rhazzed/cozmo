@@ -13,6 +13,9 @@ for i in range(p.get_device_count()):
     if (info['name'].startswith('C-Media')):
         print("    *** Found C-Media device! ***")
         micIdx = i
+    if (info['name'].startswith('USB')):
+        print("    *** Found USB device! ***")
+        micIdx = i
 print("\n")
 
 r = sr.Recognizer()
@@ -31,8 +34,14 @@ while True:
         #
         # THE FOLLOWING WORKS (Sphinx)! - 
         #print("    " + r.recognize_sphinx(audio))	# WORKS!
+        print("Trying sphinx...")
+        sphinx_out = r.recognize_sphinx(audio)
         #
-        print("    " + r.recognize_google_cloud(audio))
+        print("Trying Google...")
+        google_out = r.recognize_google_cloud(audio)
+
+        print("    Sphinx: " + sphinx_out)
+        print("    Google: " + google_out)
     except:
         print("\t<<Could not understand audio>>")
     print("")
