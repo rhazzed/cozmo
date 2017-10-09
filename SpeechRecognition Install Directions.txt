@@ -1,3 +1,9 @@
+NOTE: IN ORDER TO USE GOOGLE's SPEECH-to-TEXT YOU MUST SPECIFY A GOOGLE CREDENTIALS
+      ENVIRONMENT VARIABLE FILE, SUCH AS THIS -
+
+     export GOOGLE_APPLICATION_CREDENTIALS=./_google_creds
+
+
   824  pip3 install SpeechRecognition
   825  whoami
   826  sudo pip3 install SpeechRecognition
@@ -270,4 +276,9 @@
 
  1141  alsactl store
  1142  sr_test.py 
+
+NOTE: IN ORDER TO USE GOOGLE's SPEECH-to-TEXT YOU MUST SPECIFY A GOOGLE CREDENTIALS
+      ENVIRONMENT VARIABLE FILE, SUCH AS THIS -
+
+     export GOOGLE_APPLICATION_CREDENTIALS=./_google_creds
 
