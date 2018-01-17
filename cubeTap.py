@@ -25,9 +25,10 @@ import cozmo
 async def watch_cubes(robot: cozmo.robot.Robot):
     print("Cozmo is waiting for cubes to be tapped")
 
-    cube = await robot.world.wait_for(cozmo.objects.EvtObjectTapped)
-    print("Cube tapped!")
-    print(cube)
+    while(True):
+        cube = await robot.world.wait_for(cozmo.objects.EvtObjectTapped)
+        print("\nCube %d tapped %d time(s), intensity: %d, duration: %d, Visible: %s" % (cube.obj.object_id, cube.tap_count, cube.tap_intensity, cube.tap_duration, cube.obj.is_visible))
+        #print(cube)
     
 cozmo.run_program(watch_cubes)
 
