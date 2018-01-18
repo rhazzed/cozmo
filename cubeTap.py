@@ -24,33 +24,40 @@ import cozmo
 
 # Array of cube object ID's (random order)
 cubes = []
+allFound = False
 
 async def watch_cubes(robot: cozmo.robot.Robot):
+	global allFound
 	print("Cozmo is waiting for cubes to be tapped")
 
 	while(True):
 		#try:
-			cube = await robot.world.wait_for(cozmo.objects.EvtObjectTapped)
-			#print(cube)
-			print("\nCube %d tapped %d time(s), intensity: %d, duration: %d, Visible: %s" % (cube.obj.object_id, cube.tap_count, cube.tap_intensity, cube.tap_duration, cube.obj.is_visible))
+			evt = await robot.world.wait_for(cozmo.objects.EvtObjectTapped)
+			cube = evt.obj
+			#print(evt)
+			print("\nCube %d tapped %d time(s), intensity: %d, duration: %d, Visible: %s" % (cube.object_id, evt.tap_count, evt.tap_intensity, evt.tap_duration, cube.is_visible))
 
 			# Pickup cube's "object ID"
-			cn = cube.obj.object_id
+			cn = cube.object_id
 
 			# If not seen before, assign this cube's object ID to next available "cube[x]"
-			if cn not in cubes:
+			if cube not in cubes:
 				# Add cn to list
-				cubes.append(cn)
-				# Light cube
+				cubes.append(cube)
+				# Light up the cube
 				cols = [cozmo.lights.green_light] * 4
-				cube.obj.set_light_corners(*cols)
+				cube.set_light_corners(*cols)
 
 
 			# If detected three different cube object ID's, tell user
-			if len(cubes) == 3:
+			if len(cubes) == 3 and allFound == False:
 				print("\n\tAll %d cubes detected!\n" % len(cubes))
+				allFound = True
 
 				# TODO: Turn all cubes' lights off
+				for x in cubes:
+					cols = [cozmo.lights.off_light] * 4
+					x.set_light_corners(*cols)
 
 
 		#except concurrent.futures._base.TimeoutError:
