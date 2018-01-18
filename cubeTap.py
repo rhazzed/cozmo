@@ -21,6 +21,7 @@ You must place a cube in front of Cozmo so that he can see it.
 '''
 
 import cozmo
+import concurrent.futures
 
 # Array of cube object ID's (random order)
 cubes = []
@@ -31,7 +32,7 @@ async def watch_cubes(robot: cozmo.robot.Robot):
 	print("Cozmo is waiting for cubes to be tapped")
 
 	while(True):
-		#try:
+		try:
 			evt = await robot.world.wait_for(cozmo.objects.EvtObjectTapped)
 			cube = evt.obj
 			#print(evt)
@@ -45,8 +46,7 @@ async def watch_cubes(robot: cozmo.robot.Robot):
 				# Add cn to list
 				cubes.append(cube)
 				# Light up the cube
-				cols = [cozmo.lights.green_light] * 4
-				cube.set_light_corners(*cols)
+				cube.set_lights(cozmo.lights.green_light)
 
 
 			# If detected three different cube object ID's, tell user
@@ -56,14 +56,12 @@ async def watch_cubes(robot: cozmo.robot.Robot):
 
 				# TODO: Turn all cubes' lights off
 				for x in cubes:
-					cols = [cozmo.lights.off_light] * 4
-					x.set_light_corners(*cols)
+					x.set_lights(cozmo.lights.off_light)
 
 
-		#except concurrent.futures._base.TimeoutError:
-		#except:
-		#	print("\nDidn't detect any taps for a while...\nExiting\n")
-		#	quit()
+		except concurrent.futures.TimeoutError:
+			print("\nDidn't detect any taps for a while...\nExiting\n")
+			quit()
     
 cozmo.run_program(watch_cubes)
 
