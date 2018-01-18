@@ -28,6 +28,38 @@ stuff = []
 allFound = False
 
 
+def stackEm(robot: cozmo.robot.Robot):
+    # Lookaround until Cozmo knows where at least 2 cubes are:
+    lookaround = robot.start_behavior(cozmo.behavior.BehaviorTypes.LookAroundInPlace)
+    cubes = robot.world.wait_until_observe_num_objects(num=3, object_type=cozmo.objects.LightCube, timeout=60)
+    lookaround.stop()
+
+    if len(cubes) < 3:
+        print("Error: Only found %d cube(s)" % len(cubes))
+    else:
+        # Try and pickup the 1st cube
+        current_action = robot.pickup_object(cubes[0], num_retries=3)
+        current_action.wait_for_completed()
+        if current_action.has_failed:
+            code, reason = current_action.failure_reason
+            result = current_action.result
+            print("Pickup Cube failed: code=%s reason='%s' result=%s" % (code, reason, result))
+            return
+
+        # Now try to place that cube on the 2nd one
+        current_action = robot.place_on_object(cubes[1], num_retries=3)
+        current_action.wait_for_completed()
+        if current_action.has_failed:
+            code, reason = current_action.failure_reason
+            result = current_action.result
+            print("Place On Cube failed: code=%s reason='%s' result=%s" % (code, reason, result))
+            return
+
+        print("Cozmo successfully stacked 2 blocks!")
+
+
+
+
 async def watch_cubes(robot: cozmo.robot.Robot):
 	global allFound
 	global stuff
@@ -63,45 +95,12 @@ async def watch_cubes(robot: cozmo.robot.Robot):
 
 				# Play "stackEm" !
 				#stackEm()
-				# Lookaround until Cozmo knows where all the cubes are:
-				lookaround = robot.start_behavior(cozmo.behavior.BehaviorTypes.LookAroundInPlace)
-				cubes = robot.world.wait_until_observe_num_objects(num=2, object_type=cozmo.objects.LightCube, timeout=60)
-				print(cubes)
-				lookaround.stop()
-
-				if len(cubes) < 3:
-					print("Error: Only found %d cubes" % len(cubes))
-					quit()
-
-
-
-
-				# Try and pickup the 1st cube
-				current_action = robot.pickup_object(cubes[0], num_retries=3)
-				current_action.wait_for_completed()
-				if current_action.has_failed:
-					code, reason = current_action.failure_reason
-					result = current_action.result
-					print("Pickup Cube failed: code=%s reason='%s' result=%s" % (code, reason, result))
-					quit()
-
-				# Now try to place that cube on the 2nd one
-				current_action = robot.place_on_object(cubes[1], num_retries=3)
-				current_action.wait_for_completed()
-				if current_action.has_failed:
-					code, reason = current_action.failure_reason
-					result = current_action.result
-					print("Place On Cube failed: code=%s reason='%s' result=%s" % (code, reason, result))
-					quit()
-
-				print("Cozmo successfully stacked 2 blocks!")
-
-				# Exit
-				quit()
+				return
 
 		except concurrent.futures.TimeoutError:
 			print("\nDidn't detect any taps for a while...\nExiting\n")
 			quit()
     
 cozmo.run_program(watch_cubes)
+cozmo.run_program(stackEm)
 
