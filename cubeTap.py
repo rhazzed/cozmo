@@ -22,18 +22,41 @@ You must place a cube in front of Cozmo so that he can see it.
 
 import cozmo
 
-async def watch_cubes(robot: cozmo.robot.Robot):
-    print("Cozmo is waiting for cubes to be tapped")
+# Array of cube object ID's (random order)
+cubes = []
 
-    while(True):
-        try:
-            cube = await robot.world.wait_for(cozmo.objects.EvtObjectTapped)
-            print("\nCube %d tapped %d time(s), intensity: %d, duration: %d, Visible: %s" % (cube.obj.object_id, cube.tap_count, cube.tap_intensity, cube.tap_duration, cube.obj.is_visible))
-            #print(cube)
-        #except concurrent.futures._base.TimeoutError:
-        except:
-            print("\nDidn't detect any taps for a while...\nExiting\n")
-            quit()
+async def watch_cubes(robot: cozmo.robot.Robot):
+	print("Cozmo is waiting for cubes to be tapped")
+
+	while(True):
+		#try:
+			cube = await robot.world.wait_for(cozmo.objects.EvtObjectTapped)
+			#print(cube)
+			print("\nCube %d tapped %d time(s), intensity: %d, duration: %d, Visible: %s" % (cube.obj.object_id, cube.tap_count, cube.tap_intensity, cube.tap_duration, cube.obj.is_visible))
+
+			# Pickup cube's "object ID"
+			cn = cube.obj.object_id
+
+			# If not seen before, assign this cube's object ID to next available "cube[x]"
+			if cn not in cubes:
+				# Add cn to list
+				cubes.append(cn)
+				# Light cube
+				cols = [cozmo.lights.green_light] * 4
+				cube.obj.set_light_corners(*cols)
+
+
+			# If detected three different cube object ID's, tell user
+			if len(cubes) == 3:
+				print("\n\tAll %d cubes detected!\n" % len(cubes))
+
+				# TODO: Turn all cubes' lights off
+
+
+		#except concurrent.futures._base.TimeoutError:
+		#except:
+		#	print("\nDidn't detect any taps for a while...\nExiting\n")
+		#	quit()
     
 cozmo.run_program(watch_cubes)
 
