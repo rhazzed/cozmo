@@ -22,6 +22,7 @@ You must place a cube in front of Cozmo so that he can see it.
 
 import cozmo
 import concurrent.futures
+from random import randint
 
 # Array of cube object ID's (random order)
 stuff = []
@@ -37,8 +38,15 @@ def stackEm(robot: cozmo.robot.Robot):
     if len(cubes) < 3:
         print("Error: Only found %d cube(s)" % len(cubes))
     else:
+        first = randint(0,2)
+        print("First = cube %d" % first)
+        second = first
+        while (second == first):
+            second = randint(0,2)
+        print("Second = cube %d" % second)
+
         # Try and pickup the 1st cube
-        current_action = robot.pickup_object(cubes[0], num_retries=3)
+        current_action = robot.pickup_object(cubes[first], num_retries=3)
         current_action.wait_for_completed()
         if current_action.has_failed:
             code, reason = current_action.failure_reason
@@ -47,7 +55,7 @@ def stackEm(robot: cozmo.robot.Robot):
             return
 
         # Now try to place that cube on the 2nd one
-        current_action = robot.place_on_object(cubes[1], num_retries=3)
+        current_action = robot.place_on_object(cubes[second], num_retries=3)
         current_action.wait_for_completed()
         if current_action.has_failed:
             code, reason = current_action.failure_reason
