@@ -24,11 +24,14 @@ import cozmo
 import concurrent.futures
 
 # Array of cube object ID's (random order)
-cubes = []
+stuff = []
 allFound = False
+
 
 async def watch_cubes(robot: cozmo.robot.Robot):
 	global allFound
+	global stuff
+
 	print("Cozmo is waiting for cubes to be tapped")
 
 	while(True):
@@ -42,22 +45,59 @@ async def watch_cubes(robot: cozmo.robot.Robot):
 			cn = cube.object_id
 
 			# If not seen before, assign this cube's object ID to next available "cube[x]"
-			if cube not in cubes:
+			if cube not in stuff:
 				# Add cn to list
-				cubes.append(cube)
+				stuff.append(cube)
 				# Light up the cube
 				cube.set_lights(cozmo.lights.green_light)
 
 
 			# If detected three different cube object ID's, tell user
-			if len(cubes) == 3 and allFound == False:
-				print("\n\tAll %d cubes detected!\n" % len(cubes))
+			if len(stuff) == 3 and allFound == False:
+				print("\n\tAll %d cubes detected!\n" % len(stuff))
 				allFound = True
 
 				# TODO: Turn all cubes' lights off
-				for x in cubes:
+				for x in stuff:
 					x.set_lights(cozmo.lights.off_light)
 
+				# Play "stackEm" !
+				#stackEm()
+				# Lookaround until Cozmo knows where all the cubes are:
+				lookaround = robot.start_behavior(cozmo.behavior.BehaviorTypes.LookAroundInPlace)
+				cubes = robot.world.wait_until_observe_num_objects(num=2, object_type=cozmo.objects.LightCube, timeout=60)
+				print(cubes)
+				lookaround.stop()
+
+				if len(cubes) < 3:
+					print("Error: Only found %d cubes" % len(cubes))
+					quit()
+
+
+
+
+				# Try and pickup the 1st cube
+				current_action = robot.pickup_object(cubes[0], num_retries=3)
+				current_action.wait_for_completed()
+				if current_action.has_failed:
+					code, reason = current_action.failure_reason
+					result = current_action.result
+					print("Pickup Cube failed: code=%s reason='%s' result=%s" % (code, reason, result))
+					quit()
+
+				# Now try to place that cube on the 2nd one
+				current_action = robot.place_on_object(cubes[1], num_retries=3)
+				current_action.wait_for_completed()
+				if current_action.has_failed:
+					code, reason = current_action.failure_reason
+					result = current_action.result
+					print("Place On Cube failed: code=%s reason='%s' result=%s" % (code, reason, result))
+					quit()
+
+				print("Cozmo successfully stacked 2 blocks!")
+
+				# Exit
+				quit()
 
 		except concurrent.futures.TimeoutError:
 			print("\nDidn't detect any taps for a while...\nExiting\n")
@@ -65,17 +105,3 @@ async def watch_cubes(robot: cozmo.robot.Robot):
     
 cozmo.run_program(watch_cubes)
 
-'''
-For example, if you only need to know whether a particular cube has been
-tapped, you can call the :meth:`~cozmo.event.Dispatcher.wait_for` method
-directly on that cube's :class:`cozmo.objects.LightCube` instance.  Eg::
-    my_cube.wait_for(cozmo.objects.EvtObjectTapped)
-If, however, you want to wait for any cube to be tapped, you could instead
-call the :meth:`~cozmo.event.Dispatcher.wait_for` method on the
-:class:`World` object instead.  Eg::
-    robot.world.wait_for(cozmo.objects.EvtObjectTapped)
-In either case, ``wait_for`` will return the instance of the event's
-:class:`~cozmo.objects.EvtObjectTapped` class, which includes a
-:attr:`~cozmo.objects.EvtObjectTapped.obj` attribute, which identifies
-exactly which cube has been tapped.
-'''
