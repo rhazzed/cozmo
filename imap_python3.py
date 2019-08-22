@@ -9,6 +9,9 @@
 #                      "email_creds.py" (which git is set to ignore)
 #  2017-07-02  msipin  Allowed user to specify which account they want
 #                      to use from the (new) email_creds.conf file.
+#  2019-08-22  msipin  Added ability to skip displaying the subject line
+#                      for each message by adding the "-c" (count) command
+#                      line flag.
 ########################################################################
 import sys
 import imaplib
@@ -30,7 +33,7 @@ except ImportError:
 EMAIL_FOLDER = "Inbox"
 
 
-def process_mailbox(M,filter):
+def process_mailbox(M,filter,showEach):
     """
     Do something with emails messages in the folder.  
     For the sake of this example, print some headers.
@@ -41,33 +44,36 @@ def process_mailbox(M,filter):
         return
 
     num_msgs=0
+
+
     for num in data[0].split():
         num_msgs=num_msgs+1
     if (num_msgs == 1): print("You have {0} message".format(num_msgs))
     else: print("You have {0} messages".format(num_msgs))
 
-    for num in data[0].split():
-        #rv, data = M.fetch(num, '(RFC822)')
-        rv, data = M.fetch(num, '(BODY.PEEK[HEADER])')
-        if rv != 'OK':
-            print("ERROR 'peeking' at message", num)
-            return
+    if showEach:
+        for num in data[0].split():
+            #rv, data = M.fetch(num, '(RFC822)')
+            rv, data = M.fetch(num, '(BODY.PEEK[HEADER])')
+            if rv != 'OK':
+                print("ERROR 'peeking' at message", num)
+                return
 
-        msg = email.message_from_bytes(data[0][1])
-        try:
-            hdr = email.header.make_header(email.header.decode_header(msg['Subject']))
-            subject = str(hdr)
-        except TypeError:
-            subject = "(unknown)"
-        print('\nMessage # %d - Subj: %s' % (int(num), subject))
-        #print('Raw Date:', msg['Date'])
-        # Now convert to local date-time
-        date_tuple = email.utils.parsedate_tz(msg['Date'])
-        if date_tuple:
-            local_date = datetime.datetime.fromtimestamp(
-                email.utils.mktime_tz(date_tuple))
-            print ("        Date:", \
-                local_date.strftime("%a, %d %b %Y %H:%M:%S"))
+            msg = email.message_from_bytes(data[0][1])
+            try:
+                hdr = email.header.make_header(email.header.decode_header(msg['Subject']))
+                subject = str(hdr)
+            except TypeError:
+                subject = "(unknown)"
+            print('\nMessage # %d - Subj: %s' % (int(num), subject))
+            #print('Raw Date:', msg['Date'])
+            # Now convert to local date-time
+            date_tuple = email.utils.parsedate_tz(msg['Date'])
+            if date_tuple:
+                local_date = datetime.datetime.fromtimestamp(
+                    email.utils.mktime_tz(date_tuple))
+                print ("        Date:", \
+                    local_date.strftime("%a, %d %b %Y %H:%M:%S"))
 
 def ConfigSectionMap(section):
     dict1 = {}
@@ -91,10 +97,13 @@ def ConfigSectionMap(section):
 # be set to "argument 1"
 argBase=1
 
+# Default to showing the subject lines for every email retrieved
+showAll=True
+
 ############## DEFINE EMAIL CREDS (and from what account) ############## 
 Config = configparser.ConfigParser()
 Config.read("email_creds.conf")
-print(Config.sections())
+#print(Config.sections())
 
 # If user specified an account, pick it up
 if (len(sys.argv)>2 and "-a" == sys.argv[1]):
@@ -111,6 +120,16 @@ else:
     acct=ConfigSectionMap("default")['account']
 
 #print("DEBUG: Account = [{0}]".format(acct))
+
+# Check if user just wants a count
+if (len(sys.argv)>argBase and "-c" == sys.argv[argBase]):
+    # User JUST wants a count (aka don't display them!)
+    showAll=False
+
+    # Advance the argument base beyond the command-line-argument flag
+    argBase += 1
+
+
 
 # Establish email server + credentials...
 EMAIL_SERVER="undefined"
@@ -156,7 +175,7 @@ elif len(sys.argv)>argBase:
         if (i>argBase): filter += " "
         filter += sys.argv[i]
     filter += '")'
-print("Filter = [{0}]", filter)
+##print("Filter = [{0}]", filter)
 
 try:
     ##rv, data = M.login(EMAIL_ACCOUNT, getpass.getpass())
@@ -165,22 +184,22 @@ except imaplib.IMAP4.error:
     print ("LOGIN FAILED!!! ")
     sys.exit(1)
 
-print(rv, data)
+##print(rv, data)
 
 rv, mailboxes = M.list()
-if rv == 'OK':
-    print("Mailboxes:")
-    print(mailboxes)
+#if rv == 'OK':
+#    print("Mailboxes:")
+#    print(mailboxes)
 
 rv, data = M.select(EMAIL_FOLDER)
 if rv == 'OK':
-    print("Processing mailbox...\n")
-    process_mailbox(M, filter)
+    # print("Processing mailbox...\n")
+    process_mailbox(M, filter, showAll)
     M.close()
 else:
     print("ERROR: Unable to open mailbox ", rv)
 
 M.logout()
 
-print ("\n")
+#print ("\n")
 
