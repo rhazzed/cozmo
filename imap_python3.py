@@ -181,7 +181,7 @@ try:
     ##rv, data = M.login(EMAIL_ACCOUNT, getpass.getpass())
     rv, data = M.login(EMAIL_ACCOUNT, EMAIL_PASS)
 except imaplib.IMAP4.error:
-    print ("LOGIN FAILED!!! ")
+    print ("EMAIL LOGIN FAILED!")
     sys.exit(1)
 
 ##print(rv, data)
