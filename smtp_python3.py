@@ -76,7 +76,8 @@ else:
 #print("DEBUG: Account = [{0}]".format(acct))
 
 # Establish the "default email subject"
-msg_subject = "Cozmo Email via BSE" 
+#msg_subject = "Cozmo Email via BSE" 
+msg_subject = "6m FT8 Propagation Alert for DM14" 
 
 # If user specified an email Subject line, pick it up
 if (len(sys.argv)>(argBase+2) and "-s" == sys.argv[argBase]):
@@ -160,4 +161,5 @@ try:
 
 except Exception as exc:
     sys.exit("Mail failed: {}".format(exc))
+
 

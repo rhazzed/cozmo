@@ -12,6 +12,8 @@
 #  2019-08-22  msipin  Added ability to skip displaying the subject line
 #                      for each message by adding the "-c" (count) command
 #                      line flag.
+#  2020-06-11  msipin  Added help function and some error checking. Turned all
+#                      hard-coded command-line arguments into variables.
 ########################################################################
 import sys
 import imaplib
@@ -20,12 +22,25 @@ import email
 import email.header
 import datetime
 
+
 try:
     import configparser
 except ImportError:
     print("\nERROR: Can't find 'configparser'.  Try performing 'sudo pip3 install ConfigParser'\n")
     sys.exit(-1)
 
+
+ARG_ACCOUNT="-a"	# Argument to specify which email ACCOUNT to use
+ARG_COUNT="-c"	# COUNT, only
+ARG_ALL="all"
+ARG_NEW="new"
+ARG_HELP="-h"
+
+def help():
+	print("")
+	print("usage: %s [ %s | %s <account> | %s | %s | %s ]\n" % (sys.argv[0],ARG_HELP,ARG_ACCOUNT,ARG_COUNT,ARG_ALL,ARG_NEW))
+
+# end of help()
 
 
 
@@ -105,11 +120,24 @@ Config = configparser.ConfigParser()
 Config.read("email_creds.conf")
 #print(Config.sections())
 
+# If user wants to see command help -
+if (len(sys.argv)>argBase and ARG_HELP == sys.argv[argBase]):
+        help()
+        sys.exit(-2)
+    # endif
+
 # If user specified an account, pick it up
-if (len(sys.argv)>2 and "-a" == sys.argv[1]):
+if (len(sys.argv)>argBase and ARG_ACCOUNT == sys.argv[argBase]):
+    #print("DEBUG: argBase: ",argBase," len(sys.argv): ",len(sys.argv))
+    if (argBase+1 >= len(sys.argv)):
+        print("\nError: No account specified!")
+        help()
+        sys.exit(-1)
+    # endif
+
     # User wants to override default
     # so pick it up!
-    acct=sys.argv[2]
+    acct=sys.argv[argBase+1]
 
     # Advance the argument base beyond both the
     # command-line-argument flag and its parameter
@@ -121,8 +149,9 @@ else:
 
 #print("DEBUG: Account = [{0}]".format(acct))
 
+
 # Check if user just wants a count
-if (len(sys.argv)>argBase and "-c" == sys.argv[argBase]):
+if (len(sys.argv)>argBase and ARG_COUNT == sys.argv[argBase]):
     # User JUST wants a count (aka don't display them!)
     showAll=False
 
@@ -160,14 +189,18 @@ except configparser.NoSectionError:
 #print("DEBUG: EMAIL_ACCOUNT=[{0}]".format(EMAIL_ACCOUNT))
 #print("DEBUG: EMAIL_PASS=[{0}]".format(EMAIL_PASS))
 
+sys.exit(2)
+
+
 M = imaplib.IMAP4_SSL(EMAIL_SERVER)
 
 filter="ALL"		# Everything in the current folder
 
 
-if len(sys.argv)>argBase and sys.argv[argBase] == "all":
+
+if len(sys.argv)>argBase and sys.argv[argBase] == ARG_ALL:
     filter = "ALL"
-elif len(sys.argv)>argBase and sys.argv[argBase] == "new":
+elif len(sys.argv)>argBase and sys.argv[argBase] == ARG_NEW:
     filter = "UNSEEN"
 elif len(sys.argv)>argBase:
     filter = '(SUBJECT "'
